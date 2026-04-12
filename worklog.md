@@ -1,5 +1,57 @@
 # Worklog
 
+## 2026-04-13: Brutalist Editorial Infographic-Animation Web App
+
+### Task
+Build an interactive web app with brutalist editorial template design, infographic animation, and motion transition scroll using GSAP ScrollTrigger.
+
+### What Was Created
+
+**Design System** (`src/app/globals.css`):
+- Brutalist palette tokens: Red #FF0000, Blue #0000FF, Yellow #FFFF00, Green #39FF14, Pink #FF00FF
+- 0px border-radius globally (brutalist)
+- Custom CSS utilities: `.text-stroke`, `.text-stroke-thick`, `.grid-overlay`, `.marquee-sep`
+- Light/dark mode with high-contrast tokens
+- `prefers-reduced-motion` accessibility override
+- Bold heading defaults (900 weight, uppercase, tight line-height)
+
+**GSAP Infrastructure** (`src/lib/gsap-setup.ts`):
+- Global GSAP + ScrollTrigger plugin registration
+- Safe SSR guard (typeof window check)
+
+**8 Reusable Components** (`src/components/brutalist/`):
+1. `ScrollReveal` — Scroll-triggered fade/slide entrance wrapper (4 directions, configurable delay/duration/stagger)
+2. `ParallaxSection` — Scroll-linked parallax depth layer
+3. `KineticTypography` — Animated headline with clip-path, split-word, or fade reveal
+4. `InfographicCounter` — Animated number counter on scroll (supports decimals, prefix/suffix)
+5. `MarqueeStrip` — Infinite horizontal scrolling ticker/marquee
+6. `BrutalistCard` — Hard-edged card with hover/press GSAP animations and custom shadow
+7. `TimelineSection` — Vertical scroll-driven narrative timeline with animated line + staggered items
+8. `AnimatedBarChart` + `AnimatedDonut` — SVG chart components with scroll-triggered bar growth and segment reveals
+
+**Page Composition** (`src/app/page.tsx`):
+- Hero with kinetic timeline (badge → title clip-path → subtitle → CTA → scroll indicator)
+- Marquee ticker strip (yellow background, continuous scroll)
+- Editorial Grid (4 asymmetric brutalist cards with staggered reveals)
+- Infographic Data section (inverted colors, 4 animated counters + bar chart + donut chart)
+- Scroll Timeline (4-phase creative process with parallax)
+- CTA section (yellow background, clip-path title reveal)
+- Footer with brutalist navigation links
+
+### Technical Details
+- **Stack**: Next.js 16 + TypeScript 5 + Tailwind CSS 4 + GSAP 3.14 + @gsap/react
+- **Animation Patterns**: useGSAP for lifecycle cleanup, ScrollTrigger for scroll-driven animations, timeline choreography for hero entrance
+- **Performance**: GPU-accelerated transforms (x/y/scale), will-change sparing, once: true for one-time reveals, scrub: 1 for smooth scroll-linked motion
+- **Accessibility**: prefers-reduced-motion respected, semantic HTML, ARIA on marquee, keyboard-friendly
+- **Responsive**: Mobile-first with md/lg breakpoints, max-width containers, touch-friendly targets
+- **Dark Mode**: Full dark/light token system via CSS custom properties
+
+### Lint Results
+- 0 errors in all new source files
+- 6 pre-existing errors in old generate-seminar scripts (not part of this task)
+
+---
+
 ## 2026-04-12: Living Word Seminar Framework Document Generation
 
 ### Task
