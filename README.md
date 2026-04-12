@@ -2,8 +2,8 @@
 
 A reusable, interactive web template combining **brutalist editorial design**, **GSAP scroll-driven animations**, **animated infographics**, and **kinetic typography**. Built with Next.js 16, TypeScript, Tailwind CSS 4, and GSAP 3.
 
-[![Live on Vercel](https://img.shields.io/badge/Live-Vercel-000?style=flat-square&logo=vercel)](#)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat-square&logo=github)](#)
+[![Live on Vercel](https://img.shields.io/badge/Live-Vercel-000?style=flat-square&logo=vercel)](https://brutalist-editorial.vercel.app)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat-square&logo=github)](https://marktantongco.github.io/brutalist-editorial)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![GSAP](https://img.shields.io/badge/GSAP-3.14-88CE02?style=flat-square)](https://gsap.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -216,7 +216,7 @@ import { AnimatedBarChart, AnimatedDonut } from '@/components/brutalist';
 ```bash
 # Clone the repository
 git clone https://github.com/marktantongco/brutalist-editorial.git
-cd brutal-editorial
+cd brutalist-editorial
 
 # Install dependencies
 bun install
@@ -292,7 +292,7 @@ Edit CSS custom properties in `src/app/globals.css` under `:root` and `.dark`:
 
 ### Vercel (Recommended)
 
-The project is configured for Vercel deployment with `output: "standalone"`.
+The project is configured for Vercel deployment. Just connect your GitHub repo and Vercel handles the rest.
 
 1. Push to GitHub
 2. Connect repo at [vercel.com/new](https://vercel.com/new)
