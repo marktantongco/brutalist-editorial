@@ -13,7 +13,7 @@ interface AnimatedBarChartProps {
  * Animated bar chart for infographic sections.
  * Bars animate in height when scrolled into view.
  */
-export function AnimatedBarChart({ data, className = '' }: AnimatedBarChartProps) {
+export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const [animated, setAnimated] = useState(false);
 
@@ -55,7 +55,7 @@ export function AnimatedBarChart({ data, className = '' }: AnimatedBarChartProps
     { scope: chartRef }
   );
 
-  const maxValue = Math.max(...data.map((d) => d.value));
+  const maxValue = data.length > 0 ? Math.max(...data.map((d) => d.value)) : 1;
 
   return (
     <div ref={chartRef} className={`flex items-end justify-center gap-3 md:gap-6 ${className}`}>
@@ -89,7 +89,7 @@ interface AnimatedDonutProps {
  * Animated donut/pie chart.
  * Segments draw in on scroll.
  */
-export function AnimatedDonut({ segments, size = 200, className = '' }: AnimatedDonutProps) {
+export function AnimatedDonut({ segments = [], size = 200, className = '' }: AnimatedDonutProps) {
   const donutRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
