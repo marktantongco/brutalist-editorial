@@ -1,5 +1,43 @@
 # Worklog
 
+## 2026-04-13: GitHub + Vercel Deployment
+
+### Task
+Upload project to GitHub, create comprehensive README, deploy to GitHub Pages and Vercel.
+
+### What Was Done
+
+1. **Created comprehensive README.md** (~400 lines):
+   - Project overview with live deployment badges
+   - Architecture diagram, design system docs, color palette table
+   - Full API documentation for all 8 reusable components with code examples
+   - Customization guide (content swapping, color changes, adding sections)
+   - GSAP animation patterns reference table
+   - Deployment guides for Vercel and GitHub Pages
+   - Tech stack, performance notes, project structure tree
+
+2. **Created GitHub repository**: [marktantongco/brutalist-editorial](https://github.com/marktantongco/brutalist-editorial)
+   - Public repo with description and homepage URL
+   - 4 commits pushed to main branch
+
+3. **Deployed to GitHub Pages**: [marktantongco.github.io/brutalist-editorial](https://marktantongco.github.io/brutalist-editorial)
+   - Static export with `GITHUB_PAGES=true` env var
+   - basePath set to `/brutalist-editorial`
+   - Deployed via `gh-pages` package to `gh-pages` branch
+
+4. **Deployed to Vercel**: [brutalist-editorial.vercel.app](https://brutalist-editorial.vercel.app)
+   - Created Vercel project linked to GitHub repo
+   - Set AI_GATEWAY_API_KEY environment variable
+   - Fixed build config (removed standalone output, simplified build command)
+   - Deployment ID: dpl_BNXRaiaL4K2NMj8fiHrk34Ec5EmX
+
+5. **Build compatibility fixes**:
+   - Added `export const dynamic = "force-static"` to API route
+   - Added default empty array params to AnimatedBarChart and AnimatedDonut
+   - Configured conditional output in next.config.ts (export for GH Pages, default for Vercel)
+
+---
+
 ## 2026-04-13: Brutalist Editorial Infographic-Animation Web App
 
 ### Task
