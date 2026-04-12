@@ -4,8 +4,9 @@ const isGitHubPages = process.env.GITHUB_PAGES === "true";
 const repoName = "brutalist-editorial";
 
 const nextConfig: NextConfig = {
-  // For Vercel: "standalone"; For GitHub Pages: "export"
-  output: isGitHubPages ? "export" : "standalone",
+  // For GitHub Pages static export: "export"
+  // For Vercel: let Vercel handle the output (no output key)
+  ...(isGitHubPages ? { output: "export" } : {}),
   typescript: {
     ignoreBuildErrors: true,
   },
