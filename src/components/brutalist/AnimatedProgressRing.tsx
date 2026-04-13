@@ -36,6 +36,18 @@ export function AnimatedProgressRing({
       const circle = circleRef.current;
       const text = textRef.current;
 
+      // Check if already in viewport (guard for lazy-loaded components)
+      const elementTop = containerRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.85;
+
+      if (alreadyInView) {
+        // Set directly to final state
+        gsap.set(circle, { strokeDashoffset: circumference - (clampedValue / 100) * circumference });
+        text.textContent = `${clampedValue}%`;
+        return;
+      }
+
       // Set initial state
       gsap.set(circle, {
         strokeDashoffset: circumference,

@@ -227,3 +227,61 @@ Stage Summary:
 - PDF is now accessible at /Living_Word_Seminar_Framework.pdf on both Vercel and GitHub Pages
 - Two download entry points: Commissioning CTA button + Footer badge
 - Deployment links: Vercel (brutalist-editorial.vercel.app) + GitHub Pages (marktantongco.github.io/brutalist-editorial)
+
+---
+Task ID: 2
+Agent: Mobile Fix Agent
+Task: Fix blank/white sections, broken typography, and speed issues on mobile (Brave Android ~375px)
+
+Work Log:
+
+### FIX 1: Invalid Tailwind v4 border classes (page.tsx)
+- `border-b-3` → `border-b-[3px]` (5 occurrences: About, Journey, SessionStructure, Methodology, Adaptation sections)
+- `border-3` → `border-[3px]` (2 occurrences: Commissioning CTA buttons)
+- `border-y-3` → `border-y-[3px]` (1 occurrence: marquee ticker strip)
+- `border-t-3` → `border-t-[3px]` (1 occurrence: footer)
+
+### FIX 2: GSAP `once: true` + lazy-loaded components = invisible elements (ScrollReveal.tsx)
+- Added already-in-view guard: checks `getBoundingClientRect().top < window.innerHeight * 0.85`
+- If element is already in viewport when it mounts, uses `gsap.set()` to place it at final state
+- Otherwise proceeds with normal scroll-triggered animation
+
+### FIX 3: Same guard added to all animation components
+- **AnimatedProgressRing.tsx**: Already-in-view check before stroke animation and counter
+- **SplitTextReveal.tsx**: Already-in-view check before character stagger
+- **AnimatedChart.tsx**: Already-in-view check for both bar chart and donut chart
+- **page.tsx inline GSAP**: Already-in-view guards in AboutSection, SessionStructureSection, CommissioningSection
+
+### FIX 4: Removed fake dynamic imports (page.tsx)
+- Removed `dynamic(() => Promise.resolve(Component))` pattern (6 instances) — these don't actually code-split
+- Removed all `<Suspense>` wrappers from section rendering
+- All sections now render directly in the Home component
+- Removed `Suspense` and `dynamic` from imports
+
+### FIX 5: Broken typography on mobile (globals.css)
+- Changed `h2 line-height: 0.88` → `0.92` globally
+- Added `@media (max-width: 768px)`: `h2 { line-height: 0.95; }`
+- Added mobile guard: `.text-stroke { -webkit-text-stroke-width: 1px; }` (prevents stroke overwhelming thin mobile text)
+- Added mobile guard: `.text-stroke-thick { -webkit-text-stroke-width: 2px; }`
+
+### FIX 6: Removed `border-radius: 0 !important` from `*` selector (globals.css)
+- Removed the global `border-radius: 0 !important` override from `@layer base`
+- This was breaking circular elements (ping dots, progress rings, progress bars)
+
+### FIX 7: Removed inline `contain: layout style paint` from all sections (page.tsx)
+- Removed from 9 sections: About, Pillars, Journey, SessionStructure, Methodology, Metrics, Adaptation, Resources, Commissioning
+- CSS-only containment rule `section[style*="contain"]` in globals.css is now inert (no matching elements)
+
+### FIX 8: Grain overlay killing mobile performance (GrainOverlay.tsx)
+- Replaced unconditional render with `useSyncExternalStore`-based media query check
+- Only renders grain overlay on `min-width: 1024px AND pointer: fine` (desktop with mouse)
+- Mobile/touch devices skip the expensive feTurbulence SVG filter entirely
+
+### FIX 9: Footer bottom margin for mobile nav clearance (page.tsx)
+- Changed `mb-14 md:mb-0` → `pb-20 md:pb-12` to ensure content clears the mobile bottom nav on all devices
+
+Stage Summary:
+- All 9 root causes addressed with targeted fixes
+- No new lint errors (0 new from our changes; 6 pre-existing in generate scripts)
+- Dev server compiling successfully with all GET requests returning 200
+- Files modified: page.tsx, globals.css, ScrollReveal.tsx, AnimatedProgressRing.tsx, SplitTextReveal.tsx, AnimatedChart.tsx, GrainOverlay.tsx

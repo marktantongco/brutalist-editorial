@@ -16,7 +16,8 @@ interface ScrollRevealProps {
 
 /**
  * Reusable scroll-triggered reveal animation wrapper.
- * Codified: use once, reuse everywhere.
+ * Includes an already-in-view guard so elements are visible even
+ * if they mount after the user has scrolled past them (e.g. lazy-loaded).
  */
 export function ScrollReveal({
   children,
@@ -31,6 +32,8 @@ export function ScrollReveal({
 
   useGSAP(
     () => {
+      if (!containerRef.current) return;
+
       const fromVars: gsap.TweenVars = { opacity: 0, duration, delay, ease: 'power3.out' };
 
       switch (direction) {
@@ -40,14 +43,39 @@ export function ScrollReveal({
         case 'right': fromVars.x = -80; break;
       }
 
-      if (!containerRef.current) return;
-
       const targets = containerRef.current.querySelectorAll('.reveal-child');
+      const elements = targets.length > 0 ? targets : [containerRef.current];
 
-      if (targets.length > 0) {
-        gsap.from(targets, { ...fromVars, stagger });
+      // Check if already scrolled past trigger point (guard for lazy-loaded components)
+      const elementTop = containerRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.85;
+
+      if (alreadyInView) {
+        // Element is already in viewport — set directly to final state
+        gsap.set(elements, { opacity: 1, x: 0, y: 0, clearProps: 'all' });
       } else {
-        gsap.from(containerRef.current, fromVars);
+        // Normal scroll-triggered animation
+        if (targets.length > 0) {
+          gsap.from(targets, {
+            ...fromVars,
+            stagger,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        } else {
+          gsap.from(containerRef.current, {
+            ...fromVars,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        }
       }
     },
     { scope: containerRef }

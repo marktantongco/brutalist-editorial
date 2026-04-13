@@ -12,6 +12,7 @@ interface AnimatedBarChartProps {
 /**
  * Animated bar chart for infographic sections.
  * Bars animate in height when scrolled into view.
+ * Includes already-in-view guard for lazy-loaded components.
  */
 export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,17 @@ export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChart
 
       const bars = chartRef.current.querySelectorAll('.bar-fill');
       const labels = chartRef.current.querySelectorAll('.bar-label');
+
+      // Check if already in viewport (guard for lazy-loaded components)
+      const elementTop = chartRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.8;
+
+      if (alreadyInView) {
+        gsap.set(bars, { scaleY: 1, clearProps: 'all' });
+        gsap.set(labels, { opacity: 1, y: 0, clearProps: 'all' });
+        return;
+      }
 
       gsap.from(bars, {
         scaleY: 0,
@@ -87,6 +99,7 @@ interface AnimatedDonutProps {
 /**
  * Animated donut/pie chart.
  * Segments draw in on scroll.
+ * Includes already-in-view guard for lazy-loaded components.
  */
 export function AnimatedDonut({ segments = [], size = 200, className = '' }: AnimatedDonutProps) {
   const donutRef = useRef<HTMLDivElement>(null);
@@ -96,6 +109,17 @@ export function AnimatedDonut({ segments = [], size = 200, className = '' }: Ani
       if (!donutRef.current) return;
 
       const circles = donutRef.current.querySelectorAll('.donut-segment');
+
+      // Check if already in viewport
+      const elementTop = donutRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.8;
+
+      if (alreadyInView) {
+        gsap.set(circles, { opacity: 1, scale: 1, clearProps: 'all' });
+        return;
+      }
+
       gsap.from(circles, {
         opacity: 0,
         scale: 0.8,

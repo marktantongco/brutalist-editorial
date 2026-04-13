@@ -24,6 +24,17 @@ export function SplitTextReveal({
       if (!containerRef.current) return;
       const chars = containerRef.current.querySelectorAll('.split-char');
 
+      // Check if already in viewport (guard for lazy-loaded components)
+      const elementTop = containerRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.85;
+
+      if (alreadyInView) {
+        // Set directly to final state
+        gsap.set(chars, { opacity: 1, y: 0, clearProps: 'all' });
+        return;
+      }
+
       gsap.from(chars, {
         opacity: 0,
         y: 30,

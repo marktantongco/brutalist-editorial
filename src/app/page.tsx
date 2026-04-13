@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback, Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 import {
@@ -104,22 +103,6 @@ function MobileBottomNav() {
         ))}
       </div>
     </nav>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
-   LOADING FALLBACK
-   ═══════════════════════════════════════════════════ */
-
-function SectionSkeleton() {
-  return (
-    <div className="py-16 md:py-24 px-4 md:px-8 animate-pulse">
-      <div className="max-w-6xl mx-auto space-y-8">
-        <div className="h-8 bg-gray-200 dark:bg-gray-800 w-48" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-800 w-full max-w-2xl" />
-        <div className="h-4 bg-gray-200 dark:bg-gray-800 w-3/4" />
-      </div>
-    </div>
   );
 }
 
@@ -312,6 +295,17 @@ function AboutSection() {
     () => {
       if (!sectionRef.current) return;
       const lines = sectionRef.current.querySelectorAll('.about-line');
+
+      // Already-in-view guard
+      const elementTop = sectionRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.8;
+
+      if (alreadyInView) {
+        gsap.set(lines, { opacity: 1, y: 0, clearProps: 'all' });
+        return;
+      }
+
       gsap.from(lines, {
         y: 60,
         opacity: 0,
@@ -329,10 +323,10 @@ function AboutSection() {
   );
 
   return (
-    <section id="about" ref={sectionRef} className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
+    <section id="about" ref={sectionRef} className="py-[var(--space-lg)] px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
-          <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
+          <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">About the Seminar</span>
             <h2 className="mt-4">
               A Transformative
@@ -399,7 +393,7 @@ function PillarsSection() {
   const pillarColors = ['#E8A838', '#C44536', '#7C9885', '#D4B896'];
 
   return (
-    <section id="pillars" ref={pillarsRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+    <section id="pillars" ref={pillarsRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -529,10 +523,10 @@ function JourneySection() {
   const journeyRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="journey" ref={journeyRef} className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
+    <section id="journey" ref={journeyRef} className="py-[var(--space-lg)] px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
-          <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
+          <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Journey Map</span>
             <h2 className="mt-4">
               12-Week
@@ -623,8 +617,18 @@ function SessionStructureSection() {
     () => {
       if (!structRef.current) return;
       const blocks = structRef.current.querySelectorAll('.struct-block');
-      // Stagger from alternating sides
+
       blocks.forEach((block, i) => {
+        // Already-in-view guard per block
+        const blockTop = block.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        const alreadyInView = blockTop < windowHeight * 0.85;
+
+        if (alreadyInView) {
+          gsap.set(block, { opacity: 1, x: 0, clearProps: 'all' });
+          return;
+        }
+
         gsap.from(block, {
           x: i % 2 === 0 ? -60 : 60,
           opacity: 0,
@@ -642,6 +646,15 @@ function SessionStructureSection() {
       // Animate progress bar
       const progressBar = structRef.current.querySelector('.time-bar');
       if (progressBar) {
+        const barTop = progressBar.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        const alreadyInView = barTop < windowHeight * 0.8;
+
+        if (alreadyInView) {
+          gsap.set(progressBar, { scaleX: 1, clearProps: 'all' });
+          return;
+        }
+
         gsap.from(progressBar, {
           scaleX: 0,
           transformOrigin: 'left center',
@@ -659,10 +672,10 @@ function SessionStructureSection() {
   );
 
   return (
-    <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20" style={{ contain: 'layout style paint' }}>
+    <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20">
       <div className="max-w-5xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
-          <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
+          <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Template</span>
             <h2 className="mt-4 text-pu-charcoal dark:text-pu-cream">
               Session
@@ -765,10 +778,10 @@ function SessionStructureSection() {
 
 function MethodologySection() {
   return (
-    <section id="method" className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
+    <section id="method" className="py-[var(--space-lg)] px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
-          <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
+          <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Distinctives</span>
             <h2 className="mt-4">
               Core
@@ -813,7 +826,7 @@ function MethodologySection() {
 
 function MetricsSection() {
   return (
-    <section id="metrics" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+    <section id="metrics" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -916,10 +929,10 @@ function AdaptationSection() {
   const [activeContext, setActiveContext] = useState<number | null>(null);
 
   return (
-    <section className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
+    <section className="py-[var(--space-lg)] px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
-          <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
+          <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Flexibility</span>
             <h2 className="mt-4">
               Adaptation
@@ -984,7 +997,7 @@ function AdaptationSection() {
 
 function ResourcesSection() {
   return (
-    <section id="resources" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+    <section id="resources" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -1042,6 +1055,20 @@ function CommissioningSection() {
   useGSAP(
     () => {
       if (!ctaRef.current) return;
+
+      // Already-in-view guard
+      const elementTop = ctaRef.current.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      const alreadyInView = elementTop < windowHeight * 0.75;
+
+      if (alreadyInView) {
+        const elements = ctaRef.current.querySelectorAll('.commission-animate');
+        gsap.set(elements, { opacity: 1, y: 0, clearProps: 'all' });
+        const title = ctaRef.current.querySelector('.commission-title');
+        if (title) gsap.set(title, { clipPath: 'inset(0 0 0 0)', clearProps: 'all' });
+        return;
+      }
+
       const elements = ctaRef.current.querySelectorAll('.commission-animate');
       gsap.from(elements, {
         y: 40,
@@ -1072,7 +1099,7 @@ function CommissioningSection() {
   );
 
   return (
-    <section ref={ctaRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20" style={{ contain: 'layout style paint' }}>
+    <section ref={ctaRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20">
       <div className="max-w-4xl mx-auto text-center">
         <span className="commission-animate label-tag mb-6 inline-block">Commissioning</span>
         <h2 className="commission-title type-h1 font-black uppercase leading-[0.95] text-pu-charcoal dark:text-pu-cream text-shadow-brutal">
@@ -1089,12 +1116,12 @@ function CommissioningSection() {
         </p>
 
         <div className="commission-animate mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-          <MagneticButton className="border-3 border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
+          <MagneticButton className="border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
             Start Your Journey
           </MagneticButton>
           <MagneticButton
             onClick={handleDownloadPDF}
-            className="border-3 border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer"
+            className="border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer"
           >
             Download Framework PDF
           </MagneticButton>
@@ -1114,7 +1141,7 @@ function SeminarFooter() {
   }, []);
 
   return (
-    <footer className="border-t-3 border-pu-charcoal dark:border-pu-warm-white py-8 md:py-12 px-4 md:px-8 mb-14 md:mb-0">
+    <footer className="border-t-[3px] border-pu-charcoal dark:border-pu-warm-white py-8 md:py-12 px-4 md:px-8 pb-20 md:pb-12">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
@@ -1165,39 +1192,8 @@ function SeminarFooter() {
 }
 
 /* ═══════════════════════════════════════════════════
-   PAGE COMPOSITION — Dynamic Imports for Speed
+   PAGE COMPOSITION — All sections rendered directly
    ═══════════════════════════════════════════════════ */
-
-// Dynamically import below-fold sections for speed optimization
-const DynamicSessionStructure = dynamic(() => Promise.resolve(SessionStructureSection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-
-const DynamicMethodology = dynamic(() => Promise.resolve(MethodologySection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-
-const DynamicMetrics = dynamic(() => Promise.resolve(MetricsSection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-
-const DynamicAdaptation = dynamic(() => Promise.resolve(AdaptationSection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-
-const DynamicResources = dynamic(() => Promise.resolve(ResourcesSection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
-
-const DynamicCommissioning = dynamic(() => Promise.resolve(CommissioningSection), {
-  loading: () => <SectionSkeleton />,
-  ssr: false,
-});
 
 export default function Home() {
   return (
@@ -1213,7 +1209,7 @@ export default function Home() {
         <HeroSection />
 
         {/* Animated Ticker Strip */}
-        <div className="border-y-3 border-pu-charcoal dark:border-pu-warm-white py-3 bg-pu-amber/30 dark:bg-amber-500/20 overflow-hidden" aria-label="Seminar keywords ticker">
+        <div className="border-y-[3px] border-pu-charcoal dark:border-pu-warm-white py-3 bg-pu-amber/30 dark:bg-amber-500/20 overflow-hidden" aria-label="Seminar keywords ticker">
           <div className="flex animate-[marquee_30s_linear_infinite] whitespace-nowrap">
             {[...Array(2)].map((_, set) => (
               <span key={set} className="flex items-center gap-6 mr-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] font-mono opacity-70">
@@ -1244,35 +1240,23 @@ export default function Home() {
         {/* ── 12-WEEK JOURNEY MAP ── */}
         <JourneySection />
 
-        {/* ── SESSION STRUCTURE (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicSessionStructure />
-        </Suspense>
+        {/* ── SESSION STRUCTURE ── */}
+        <SessionStructureSection />
 
-        {/* ── METHODOLOGY (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicMethodology />
-        </Suspense>
+        {/* ── METHODOLOGY ── */}
+        <MethodologySection />
 
-        {/* ── SUCCESS METRICS (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicMetrics />
-        </Suspense>
+        {/* ── SUCCESS METRICS ── */}
+        <MetricsSection />
 
-        {/* ── ADAPTATION (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicAdaptation />
-        </Suspense>
+        {/* ── ADAPTATION ── */}
+        <AdaptationSection />
 
-        {/* ── RESOURCES (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicResources />
-        </Suspense>
+        {/* ── RESOURCES ── */}
+        <ResourcesSection />
 
-        {/* ── COMMISSIONING CTA (lazy loaded) ── */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <DynamicCommissioning />
-        </Suspense>
+        {/* ── COMMISSIONING CTA ── */}
+        <CommissioningSection />
 
         {/* ── FOOTER ── */}
         <SeminarFooter />
