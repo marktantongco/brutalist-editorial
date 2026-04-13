@@ -1,6 +1,6 @@
-# Brutalist Editorial — Interactive Infographic Template
+# The Living Word — Interactive Bible Study Seminar
 
-A reusable, interactive web template combining **brutalist editorial design**, **GSAP scroll-driven animations**, **animated infographics**, and **kinetic typography**. Built with Next.js 16, TypeScript, Tailwind CSS 4, and GSAP 3.
+A cinematic, scroll-driven interactive web experience presenting a **12-week Bible study seminar framework** for the Filipino Christian community. Built with Next.js 16, GSAP 3, Tailwind CSS 4, and a neo-brutalist editorial design system.
 
 [![Live on Vercel](https://img.shields.io/badge/Live-Vercel-000?style=flat-square&logo=vercel)](https://brutalist-editorial.vercel.app)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-000?style=flat-square&logo=github)](https://marktantongco.github.io/brutalist-editorial)
@@ -13,9 +13,9 @@ A reusable, interactive web template combining **brutalist editorial design**, *
 
 ## Overview
 
-This project is a **production-ready editorial template system** with scroll-driven motion design. It demonstrates how brutalist aesthetics can be combined with smooth GSAP animations to create engaging, scroll-driven storytelling experiences.
+**The Living Word** is a comprehensive 12-week program designed to equip Filipino Christian believers at every stage of spiritual maturity to know God deeply through His attributes, character, and abiding presence. This web app transforms the seminar framework document into an immersive, scroll-driven editorial experience with cinematic animations and interactive infographics.
 
-The entire component library is **reusable and modular** — swap the data layer at the top of `page.tsx` and everything adapts automatically.
+The seminar uses the **SOAP inductive Bible study method** (Scripture, Observation, Application, Prayer) and a **4-Pillar Architecture** (Encounter, Exegesis, Examination, Expression) that mirrors the natural rhythm of spiritual growth.
 
 ## Live Demos
 
@@ -28,17 +28,47 @@ The entire component library is **reusable and modular** — swap the data layer
 
 ## Features
 
-- **Brutalist Design System** — 0px border-radius, thick borders, high-contrast palette, raw typography
-- **GSAP ScrollTrigger** — Scroll-driven parallax, reveals, counters, and timeline animations
-- **Kinetic Typography** — Clip-path text reveals, split-word animations, and fade entrances
-- **Animated Infographics** — Bar charts and donut charts that animate on scroll
-- **Infinite Marquee** — Continuous horizontal ticker with configurable speed
-- **Interactive Cards** — GSAP-powered hover/press micro-interactions
-- **Scroll Timeline** — Vertical narrative timeline with animated line growth
-- **Dark Mode** — Full light/dark theme via CSS custom properties
-- **Accessibility** — `prefers-reduced-motion` support, semantic HTML, ARIA attributes
-- **Mobile-First** — Responsive across all breakpoints, touch-friendly targets
-- **Modular Data Layer** — Swap content without touching animation code
+### Content Sections (12 total)
+- **Cinematic Hero** — Clip-path text reveal ("The Living Word"), rotating Scripture verse carousel (Psalm 119:18, James 1:22, 2 Timothy 2:2, 2 Timothy 3:16), elastic cross corner accents, animated stats
+- **Sticky Navigation** — Floating nav with scroll-linked opacity and underline hover animations
+- **Executive Summary** — 3-column layout with staggered paragraph reveals and quick facts sidebar
+- **4-Pillar Architecture** — Interactive expandable cards (Encounter/Exegesis/Examination/Expression) with animated session time allocation progress bar
+- **12-Week Journey Map** — 4 phase overview cards + full 12-week grid with parallax depth
+- **Session Structure Template** — Animated visual template with time bar (GSAP scaleX), numbered steps, homework section
+- **Core Methodology** — 6 distinctive cards with Scripture references (Spirit-Dependence, Text-Centered Authority, SOAP, Whole-Life Integration, Communal Discernment, Multiplication-Minded)
+- **Success Metrics Dashboard** — 6 animated counters + SVG donut chart + bar chart
+- **Adaptation Framework** — Interactive filter buttons (Youth/Senior/New Believers/Leadership/Recovery) with fade transitions
+- **Essential Resources** — 6 resource cards (Study Bible, SOAP Journal, Cross-Reference Tools, etc.)
+- **Commissioning CTA** — 2 Timothy 2:2 benediction with clip-path title reveal + magnetic buttons
+- **Footer** — Clean footer with section navigation
+
+### GSAP Cinematic Animations
+- **Clip-path text reveals** — Cinematic wipe-in for hero headlines
+- **Elastic spring physics** — Cross corner accents with elastic.out easing
+- **Scroll-scrubbed parallax** — Depth effect on journey map grid
+- **Staggered element entrances** — Directional reveals (up/down/left/right) across all sections
+- **Rotating verse carousel** — Auto-cycling Scripture quotes with crossfade
+- **Animated progress bars** — GSAP scaleX for session time allocation
+- **Magnetic buttons** — Cursor-following button interactions with elastic snap-back
+
+### Infographic Visualizations
+- **Animated number counters** — Scroll-triggered counting for metrics (90% retention, 80% participation, etc.)
+- **SVG donut chart** — Session time allocation visualization
+- **Bar chart** — Target achievement rates with staggered bar reveals
+- **Interactive expandable cards** — Click-to-reveal pillar details
+
+### Speed Optimization
+- **Dynamic imports** — 6 below-fold sections lazy-loaded with Suspense
+- **CSS `contain: layout style paint`** — Rendering isolation on all sections
+- **`once: true` ScrollTriggers** — No repeat animation computations
+- **Skeleton loading states** — Shimmer placeholders during lazy load
+- **`display: swap` fonts** — Prevents Flash of Invisible Text (FOIT)
+
+### Accessibility
+- **`prefers-reduced-motion`** — Disables all animations for motion-sensitive users
+- **Focus-visible outlines** — 3px yellow outline for keyboard navigation
+- **Semantic HTML** — Proper heading hierarchy, landmarks, ARIA labels
+- **Print styles** — Clean print layout with hidden overlays
 
 ---
 
@@ -47,53 +77,68 @@ The entire component library is **reusable and modular** — swap the data layer
 ```
 src/
 ├── app/
-│   ├── globals.css          # Design system tokens + brutalist utilities
-│   ├── layout.tsx           # Root layout with Geist fonts
-│   └── page.tsx             # Page composition + data layer
+│   ├── globals.css              # Design system tokens + seminar styles
+│   ├── layout.tsx               # Root layout, SEO metadata, structured data
+│   └── page.tsx                 # Page composition + cinematic animations
 ├── components/
-│   └── brutalist/
-│       ├── index.ts         # Barrel export (all reusable components)
-│       ├── ScrollReveal.tsx # Scroll-triggered entrance wrapper
-│       ├── KineticTypography.tsx # Animated text reveals
-│       ├── InfographicCounter.tsx # Animated number counters
-│       ├── MarqueeStrip.tsx # Infinite horizontal ticker
-│       ├── BrutalistCard.tsx # Interactive card with GSAP hover
-│       ├── TimelineSection.tsx  # Scroll-driven narrative timeline
-│       └── AnimatedChart.tsx    # Bar + donut SVG charts
-└── lib/
-    ├── gsap-setup.ts        # GSAP + ScrollTrigger registration
-    └── utils.ts             # Utility functions (cn, etc.)
+│   ├── brutalist/               # 12 reusable animation components
+│   │   ├── index.ts             # Barrel export
+│   │   ├── ScrollReveal.tsx     # Scroll-triggered entrance wrapper
+│   │   ├── ParallaxSection.tsx  # Scroll-linked depth parallax
+│   │   ├── KineticTypography.tsx # Clip/split/fade text reveals
+│   │   ├── InfographicCounter.tsx # Animated number counters
+│   │   ├── MarqueeStrip.tsx     # Infinite horizontal ticker
+│   │   ├── BrutalistCard.tsx    # GSAP hover/press card
+│   │   ├── TimelineSection.tsx  # Scroll-driven narrative timeline
+│   │   ├── AnimatedChart.tsx    # SVG bar + donut charts
+│   │   ├── CustomCursor.tsx     # Mix-blend-mode cursor dot
+│   │   ├── GrainOverlay.tsx     # Film grain texture
+│   │   ├── TextScramble.tsx     # Hacker-style text scramble effect
+│   │   ├── MagneticButton.tsx   # Cursor-following magnetic button
+│   │   └── SmoothScroll.tsx     # GSAP ScrollToPlugin wrapper
+│   ├── seminar/
+│   │   └── data.ts             # Living Word content data layer
+│   └── ui/                      # shadcn/ui base components
+├── lib/
+│   ├── gsap-setup.ts           # GSAP + ScrollTrigger + ScrollToPlugin
+│   └── utils.ts                # Utility functions
+└── prisma/
 ```
 
 ---
 
 ## Design System
 
-### Color Palette
+### Color Palette (powerUP Brand)
 
-| Token | Light | Dark |
-|-------|-------|------|
-| Background | `#FAFAFA` | `#0A0A0A` |
-| Foreground | `#0A0A0A` | `#FAFAFA` |
-| Accent (Red) | `#FF0000` | `#FF0000` |
-| Blue | `#0000FF` | `#3B82F6` |
-| Yellow | `#FFFF00` | `#FACC15` |
-| Green | `#39FF14` | `#39FF14` |
-| Pink | `#FF00FF` | `#E879F9` |
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--pu-yellow` | `#FFEA00` | Primary accent, badges, highlights |
+| `--pu-red` | `#CC0000` | Secondary accent, scripture refs, dots |
+| `--pu-black` | `#0A0A0A` | Primary text, borders, dark background |
+| `--pu-white` | `#FAFAFA` | Light background, inverted text |
+| `--pu-dark` | `#1A1A1A` | Card backgrounds in dark mode |
+| `--pu-gray` | `#888888` | Muted text, tertiary accents |
 
 ### Typography
 
-- **Font**: Geist (sans-serif) + Geist Mono (monospace)
-- **Headings**: 900 weight, uppercase, tight line-height (0.95)
-- **Body**: 400 weight, relaxed line-height (1.6)
-- **Display sizes**: `clamp()`-based responsive scaling
+- **Display**: Syne (sans-serif) — 400-800 weights, uppercase headings, tight leading
+- **Mono**: Space Mono (monospace) — 400-700 weights, labels, metadata, code
+- **Headings**: 900 weight, `text-transform: uppercase`, `letter-spacing: -0.03em`, `line-height: 0.92`
+- **Body**: 400 weight, relaxed `line-height: 1.6`
 
 ### CSS Utilities
 
 ```css
-.text-stroke          /* Outline text (2px stroke, transparent fill) */
-.text-stroke-thick    /* Thicker outline (3px stroke) */
-.grid-overlay         /* Subtle grid lines background pattern */
+.text-stroke           /* 2px outline text, transparent fill */
+.text-stroke-thick     /* 3px outline text */
+.text-fill-yellow      /* Yellow fill on stroked text */
+.text-fill-red         /* Red fill on stroked text */
+.label-tag             /* Yellow badge with mono font */
+.grid-overlay          /* Subtle grid lines background */
+.grain-overlay         /* Film grain texture (fixed, pointer-events: none) */
+.hr-accent             /* 3px black horizontal rule */
+.hr-accent-yellow      /* 3px yellow horizontal rule */
 ```
 
 ---
@@ -101,7 +146,6 @@ src/
 ## Reusable Components
 
 ### ScrollReveal
-
 Scroll-triggered entrance animation wrapper. Supports 4 directions and stagger.
 
 ```tsx
@@ -110,97 +154,151 @@ import { ScrollReveal } from '@/components/brutalist';
 <ScrollReveal direction="up" delay={0.2} stagger={0.1}>
   <div className="reveal-child">Item 1</div>
   <div className="reveal-child">Item 2</div>
-  <div className="reveal-child">Item 3</div>
 </ScrollReveal>
 ```
 
-**Props**: `direction` (up/down/left/right), `delay`, `duration`, `stagger`, `once`
-
-### KineticTypography
-
-Animated headline with three reveal modes.
-
-```tsx
-import { KineticTypography } from '@/components/brutalist';
-
-<KineticTypography text="Hello World" tag="h1" revealType="clip" />
-<KineticTypography text="Split Words" tag="h2" revealType="split" />
-<KineticTypography text="Fade In" tag="h3" revealType="fade" />
-```
-
-**Props**: `text`, `tag`, `revealType` (clip/split/fade), `delay`
+**Props**: `direction` (up/down/left/right), `delay`, `duration`, `stagger`, `once`, `className`
 
 ### InfographicCounter
-
-Animated number counter that triggers on scroll.
+Animated number counter triggered on scroll.
 
 ```tsx
 import { InfographicCounter } from '@/components/brutalist';
 
-<InfographicCounter target={2847} prefix="$" suffix="+" label="Revenue" />
+<InfographicCounter target={90} suffix="%" label="Retention" />
 ```
 
-**Props**: `target`, `suffix`, `prefix`, `label`
-
-### MarqueeStrip
-
-Infinite horizontal scrolling ticker.
-
-```tsx
-import { MarqueeStrip } from '@/components/brutalist';
-
-<MarqueeStrip items={['BRUTALISM', 'EDITORIAL', 'MOTION']} speed={25} />
-```
-
-**Props**: `items` (string[]), `speed` (seconds per cycle)
+**Props**: `target`, `suffix`, `prefix`, `label`, `className`
 
 ### BrutalistCard
-
 Hard-edged card with GSAP hover/press micro-interactions.
 
 ```tsx
 import { BrutalistCard } from '@/components/brutalist';
 
-<BrutalistCard hoverShadow="6px 6px 0px #FF0000" borderColor="#000">
+<BrutalistCard hoverShadow="8px 8px 0px #FFEA00">
   <div className="p-6">
     <h3>Card Title</h3>
-    <p>Card content goes here.</p>
+    <p>Content here.</p>
   </div>
 </BrutalistCard>
 ```
 
 **Props**: `hoverShadow`, `borderColor`, `className`
 
-### TimelineSection
-
-Vertical scroll-driven narrative timeline.
-
-```tsx
-import { TimelineSection } from '@/components/brutalist';
-
-<TimelineSection items={[
-  { year: '2024', title: 'Started', description: 'Project began.' },
-  { year: '2025', title: 'Launched', description: 'Went live.' },
-]} />
-```
-
 ### AnimatedBarChart & AnimatedDonut
-
 SVG charts that animate on scroll.
 
 ```tsx
 import { AnimatedBarChart, AnimatedDonut } from '@/components/brutalist';
 
 <AnimatedBarChart data={[
-  { label: 'A', value: 92, color: '#FF0000' },
-  { label: 'B', value: 78, color: '#0000FF' },
+  { label: 'A', value: 92, color: '#FFEA00' },
 ]} />
 
 <AnimatedDonut segments={[
-  { label: 'A', value: 35, color: '#FF0000' },
-  { label: 'B', value: 25, color: '#0000FF' },
-]} size={200} />
+  { label: 'A', value: 35, color: '#CC0000' },
+]} size={220} />
 ```
+
+### KineticTypography
+Animated headline with three reveal modes: clip-path wipe, split-word 3D, and fade.
+
+```tsx
+import { KineticTypography } from '@/components/brutalist';
+
+<KineticTypography text="Hello World" tag="h1" revealType="clip" />
+<KineticTypography text="Split Words" tag="h2" revealType="split" />
+```
+
+### MarqueeStrip
+Infinite horizontal scrolling ticker.
+
+```tsx
+import { MarqueeStrip } from '@/components/brutalist';
+
+<MarqueeStrip items={['LIVING WORD', 'SCRIPTURE', 'SOAP']} speed={35} />
+```
+
+### TextScramble
+Hacker-style text scramble effect triggered by IntersectionObserver.
+
+```tsx
+import { TextScramble } from '@/components/brutalist';
+
+<TextScramble text="Knowing God Through Scripture" className="font-mono text-sm" />
+```
+
+### MagneticButton
+Cursor-following button with elastic snap-back.
+
+```tsx
+import { MagneticButton } from '@/components/brutalist';
+
+<MagneticButton className="border-2 border-black bg-yellow px-6 py-3">
+  Explore
+</MagneticButton>
+```
+
+### TimelineSection
+Vertical scroll-driven narrative timeline with animated line growth.
+
+```tsx
+import { TimelineSection } from '@/components/brutalist';
+
+<TimelineSection items={[
+  { year: 'Week 1', title: 'God is Spirit', description: 'John 4:21-24' },
+]} />
+```
+
+---
+
+## Data Layer
+
+All seminar content lives in `src/components/seminar/data.ts`. Edit these exports to customize:
+
+| Export | Type | Purpose |
+|--------|------|---------|
+| `SEMINAR_META` | Object | Title, subtitle, format details |
+| `HERO_STATS` | Array | Quick stat counters in hero |
+| `MARQUEE_ITEMS` | string[] | Ticker strip words/phrases |
+| `FOUR_PILLARS` | Array | 4-Pillar content (title, description, points) |
+| `PHASES` | Array | 4 journey phases (Foundation/Formation/Function/Fruit) |
+| `WEEKLY_JOURNEY` | Array | 12-week breakdown (theme, scripture, focus) |
+| `SESSION_STRUCTURE` | Array | Session template (steps per pillar) |
+| `METHODOLOGY` | Array | 6 core distinctives |
+| `SUCCESS_METRICS` | Array | Animated counter targets |
+| `METRIC_DONUT` | Array | Donut chart segments |
+| `ADAPTATION_CONTEXTS` | Array | 5 adaptation contexts |
+| `RESOURCES` | Array | Essential resources |
+| `SCRIPTURE_VERSES` | Array | Rotating hero verses |
+
+---
+
+## GSAP Animation Patterns
+
+| Pattern | Use Case | Implementation |
+|---------|----------|---------------|
+| `ScrollTrigger` + `once: true` | One-time reveals | Elements animate in, stay visible |
+| `scrub: 1` | Scroll-linked motion | Parallax, timeline line growth |
+| Timeline choreography | Hero entrance | Sequential with overlap (`-=0.3`) |
+| `clipPath: 'inset()'` | Text reveals | Cinematic wipe-in effect |
+| `elastic.out()` | Bouncy accents | Cross corners, dots |
+| `power3.out` | Smooth entrances | Standard easing for reveals |
+| `expo.inOut` | Dramatic reveals | Clip-path headline reveals |
+| `setInterval` + `gsap.to` | Carousel | Rotating Scripture verses |
+| `useGSAP` hook | All animations | Automatic cleanup on unmount |
+
+---
+
+## SEO
+
+- **Open Graph** — Full OG metadata for social sharing
+- **Twitter Cards** — `summary_large_image` format
+- **Structured Data** — `EducationalEvent` schema (JSON-LD)
+- **Robots** — `index: true`, `follow: true`, large image preview
+- **Canonical URL** — Prevents duplicate content
+- **Keywords** — Bible study, Filipino church, SOAP method, discipleship, etc.
 
 ---
 
@@ -230,61 +328,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Build for Production
 
 ```bash
+# Standard build (for Vercel/server rendering)
+bun run build
+
 # Static export (for GitHub Pages)
 bun run build:static
-
-# Or standard build (for Vercel/server)
-bun run build
 ```
-
----
-
-## Customization Guide
-
-### Swapping Content
-
-All content lives in the **DATA LAYER** at the top of `src/app/page.tsx`. Edit these constants to customize:
-
-| Variable | Purpose |
-|----------|---------|
-| `MARQUEE_ITEMS` | Ticker strip words/phrases |
-| `EDITORIAL_CARDS` | Grid cards (number, title, description, accent) |
-| `BAR_DATA` | Bar chart data points |
-| `DONUT_DATA` | Donut chart segments |
-| `TIMELINE_ITEMS` | Timeline entries (year, title, description) |
-
-### Changing Colors
-
-Edit CSS custom properties in `src/app/globals.css` under `:root` and `.dark`:
-
-```css
-:root {
-  --brutal-red: #FF0000;
-  --brutal-blue: #0000FF;
-  --brutal-yellow: #FFFF00;
-  /* ... */
-}
-```
-
-### Adding New Sections
-
-1. Create data constants in the data layer
-2. Add a new section function component in `page.tsx`
-3. Compose it into the `<main>` element
-4. Wrap content with `ScrollReveal` for automatic entrance animations
-
----
-
-## GSAP Animation Patterns
-
-| Pattern | Use Case | Implementation |
-|---------|----------|---------------|
-| `ScrollTrigger` + `once: true` | One-time reveals | Elements animate in, stay visible |
-| `scrub: 1` | Scroll-linked motion | Animation tied to scroll position |
-| Timeline choreography | Hero entrance | Sequential animations with overlap (`-=0.3`) |
-| `ScrollTrigger.batch` | Staggered grids | Multiple items animate as a batch |
-| `from()` | Prefer over `fromTo()` | GSAP auto-computes initial state |
-| `useGSAP` hook | All animations | Automatic cleanup on unmount |
 
 ---
 
@@ -292,30 +341,53 @@ Edit CSS custom properties in `src/app/globals.css` under `:root` and `.dark`:
 
 ### Vercel (Recommended)
 
-The project is configured for Vercel deployment. Just connect your GitHub repo and Vercel handles the rest.
-
 1. Push to GitHub
 2. Connect repo at [vercel.com/new](https://vercel.com/new)
 3. Vercel auto-detects Next.js and deploys
 
-Or via CLI:
-```bash
-npx vercel --prod
-```
+The project uses standard Next.js output — no special configuration needed for Vercel.
 
 ### GitHub Pages
 
 For static hosting on GitHub Pages:
 
 ```bash
-# Build static export
+# Build static export with basePath
 bun run build:static
 
 # Deploy to gh-pages branch
-bun run deploy:gh-pages
+GITHUB_TOKEN=your_token bun run deploy:gh-pages
 ```
 
-The `next.config.ts` includes `output: "export"` configuration and `basePath` for GitHub Pages.
+The `next.config.ts` conditionally adds `output: "export"` and `basePath: "/brutalist-editorial"` when `GITHUB_PAGES=true` is set.
+
+---
+
+## Customization Guide
+
+### Swapping Content
+
+Edit `src/components/seminar/data.ts` to change all seminar content. The data layer is decoupled from animation logic — change the data and everything re-renders correctly.
+
+### Changing Colors
+
+Edit CSS custom properties in `src/app/globals.css`:
+
+```css
+:root {
+  --pu-yellow: #FFEA00;
+  --pu-red: #CC0000;
+  --pu-black: #0A0A0A;
+  /* ... */
+}
+```
+
+### Adding New Sections
+
+1. Add data constants in `src/components/seminar/data.ts`
+2. Create a new section component in `src/app/page.tsx`
+3. Wrap content with `ScrollReveal` for entrance animations
+4. For below-fold sections, wrap with `dynamic()` + `Suspense` for lazy loading
 
 ---
 
@@ -326,66 +398,44 @@ The `next.config.ts` includes `output: "export"` configuration and `basePath` fo
 | Next.js | 16 | React framework with App Router |
 | TypeScript | 5 | Type safety |
 | Tailwind CSS | 4 | Utility-first styling |
-| GSAP | 3.14 | Scroll-driven animations |
-| @gsap/react | 2.1 | React integration (useGSAP hook) |
-| Recharts | 2.15 | Chart library (available) |
-| Framer Motion | 12 | Additional animations (available) |
+| GSAP | 3.14 | Scroll-driven cinematic animations |
+| @gsap/react | 2.1 | React useGSAP hook for memory safety |
+| Framer Motion | 12 | Additional micro-interactions |
+| Recharts | 2.15 | Data visualization library |
 | Lucide React | 0.525 | Icon library |
+| next-themes | 0.4 | Dark/light mode |
 
 ---
 
 ## Performance
 
 - **GPU-accelerated** — All animations use `transform` and `opacity` (composited properties)
-- **ScrollTrigger efficiency** — `once: true` for one-time reveals, no re-animation on scroll back
-- **Bundle optimization** — Tree-shaking, dynamic imports where needed
-- **Accessibility** — `prefers-reduced-motion` disables all animations for motion-sensitive users
-- **Lighthouse** — Target: 95+ Performance, 100 Accessibility
+- **Dynamic imports** — Below-fold sections lazy-loaded with Suspense boundaries
+- **CSS containment** — `contain: layout style paint` isolates section rendering
+- **ScrollTrigger efficiency** — `once: true` for one-time reveals
+- **Font optimization** — `display: swap` with `preload: true` on Syne + Space Mono
+- **Accessibility** — `prefers-reduced-motion` disables all animations
+- **Build size** — Compiles in ~3.3s with Turbopack, 6 static pages
 
 ---
 
-## Project Structure
+## Seminar Details
 
-```
-brutalist-editorial/
-├── public/
-│   └── robots.txt
-├── src/
-│   ├── app/
-│   │   ├── api/route.ts
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/
-│   │   ├── brutalist/
-│   │   │   ├── index.ts
-│   │   │   ├── ScrollReveal.tsx
-│   │   │   ├── KineticTypography.tsx
-│   │   │   ├── InfographicCounter.tsx
-│   │   │   ├── MarqueeStrip.tsx
-│   │   │   ├── BrutalistCard.tsx
-│   │   │   ├── TimelineSection.tsx
-│   │   │   └── AnimatedChart.tsx
-│   │   └── ui/               # shadcn/ui components
-│   ├── hooks/
-│   ├── lib/
-│   │   ├── gsap-setup.ts
-│   │   ├── utils.ts
-│   │   └── db.ts
-│   └── prisma/
-├── prisma/
-├── next.config.ts
-├── tailwind.config.ts
-├── tsconfig.json
-├── package.json
-└── README.md
-```
+| Element | Detail |
+|---------|--------|
+| **Duration** | 12 weeks (modular design) |
+| **Format** | Weekly 90-min sessions + small groups |
+| **Method** | SOAP Inductive (Scripture, Observation, Application, Prayer) |
+| **Architecture** | 4 Pillars (Encounter, Exegesis, Examination, Expression) |
+| **Language** | Bilingual Filipino-English / Taglish |
+| **Group Size** | 3-4 per breakout group |
+| **4 Phases** | Foundation (Wk 1-3) → Formation (Wk 4-6) → Function (Wk 7-9) → Fruit (Wk 10-12) |
 
 ---
 
 ## License
 
-MIT License. Built by [Mark Tantongco](https://github.com/marktantongco).
+MIT License. Built by [Mark Tantongco](https://github.com/marktantongco) with [powerUP](https://github.com/marktantongco).
 
 ---
 
@@ -395,3 +445,4 @@ MIT License. Built by [Mark Tantongco](https://github.com/marktantongco).
 - [Next.js](https://nextjs.org/) — The React framework for production
 - [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
 - [shadcn/ui](https://ui.shadcn.com/) — Beautifully designed components
+- **Living Word Seminar Framework** — Filipino Christian Community Bible Study, April 2026
