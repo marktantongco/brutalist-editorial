@@ -735,3 +735,9 @@ a:active, button:active, [role="button"]:active {
 .skip-link:focus {
   top: 0;
 }
+
+/* ── Pure CSS marquee animation ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

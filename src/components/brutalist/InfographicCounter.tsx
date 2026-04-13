@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -14,7 +14,7 @@ interface InfographicCounterProps {
 
 /**
  * Animated number counter triggered on scroll.
- * Reusable for any metric/stat display.
+ * Uses direct DOM manipulation — zero React re-renders during animation.
  */
 export function InfographicCounter({
   target,
@@ -24,17 +24,20 @@ export function InfographicCounter({
   className = '',
 }: InfographicCounterProps) {
   const counterRef = useRef<HTMLDivElement>(null);
-  const [displayValue, setDisplayValue] = useState(0);
+  const valueRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
-      if (!counterRef.current) return;
+      if (!counterRef.current || !valueRef.current) return;
+
+      const displayEl = valueRef.current;
+      const isInteger = target % 1 === 0;
 
       const obj = { val: 0 };
       gsap.to(obj, {
         val: target,
         duration: 2,
-        snap: { val: target % 1 === 0 ? 1 : 0.1 },
+        snap: { val: isInteger ? 1 : 0.1 },
         ease: 'power2.out',
         scrollTrigger: {
           trigger: counterRef.current,
@@ -42,7 +45,8 @@ export function InfographicCounter({
           once: true,
         },
         onUpdate: () => {
-          setDisplayValue(obj.val);
+          // Direct DOM — no setState, no re-renders
+          displayEl.textContent = `${prefix}${isInteger ? Math.round(obj.val) : obj.val.toFixed(1)}${suffix}`;
         },
       });
     },
@@ -51,8 +55,8 @@ export function InfographicCounter({
 
   return (
     <div ref={counterRef} className={`text-center ${className}`}>
-      <span className="block font-black tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
-        {prefix}{target % 1 === 0 ? Math.round(displayValue) : displayValue.toFixed(1)}{suffix}
+      <span ref={valueRef} className="block font-black tabular-nums" style={{ fontVariantNumeric: 'tabular-nums' }}>
+        {prefix}0{suffix}
       </span>
       <span className="block text-xs uppercase tracking-[0.3em] mt-1 opacity-70">{label}</span>
     </div>

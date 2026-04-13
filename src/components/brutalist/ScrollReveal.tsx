@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
-import { gsap, ScrollTrigger } from '@/lib/gsap-setup';
+import { gsap } from '@/lib/gsap-setup';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -40,9 +40,11 @@ export function ScrollReveal({
         case 'right': fromVars.x = -80; break;
       }
 
-      const targets = containerRef.current?.querySelectorAll('.reveal-child');
+      if (!containerRef.current) return;
 
-      if (targets && targets.length > 0) {
+      const targets = containerRef.current.querySelectorAll('.reveal-child');
+
+      if (targets.length > 0) {
         gsap.from(targets, { ...fromVars, stagger });
       } else {
         gsap.from(containerRef.current, fromVars);

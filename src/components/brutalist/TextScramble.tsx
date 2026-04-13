@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 
 interface TextScrambleProps {
   text: string;
@@ -16,7 +16,7 @@ export function TextScramble({
   scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%',
 }: TextScrambleProps) {
   const elRef = useRef<HTMLElement>(null);
-  const [displayText, setDisplayText] = useState(text);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const scramble = useCallback(() => {
     if (!elRef.current) return;
@@ -24,23 +24,27 @@ export function TextScramble({
     const length = text.length;
     let iteration = 0;
 
-    const interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split('')
-          .map((char, i) => {
-            if (char === ' ') return ' ';
-            if (i < iteration) return text[i];
-            return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-          })
-          .join('')
-      );
+    // Clear any previous interval
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      // Direct DOM manipulation instead of setState — eliminates ~200 renders/sec
+      if (!elRef.current) return;
+      elRef.current.textContent = text
+        .split('')
+        .map((char, i) => {
+          if (char === ' ') return ' ';
+          if (i < iteration) return text[i];
+          return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        })
+        .join('');
 
       iteration += 1 / 2;
 
       if (iteration >= length) {
-        clearInterval(interval);
-        setDisplayText(text);
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = null;
+        if (elRef.current) elRef.current.textContent = text;
       }
     }, 30);
   }, [text, scrambleChars]);
@@ -61,12 +65,15 @@ export function TextScramble({
     );
 
     observer.observe(elRef.current);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, [scramble]);
 
   return (
     <Tag ref={elRef as React.RefObject<never>} className={className}>
-      {displayText}
+      {text}
     </Tag>
   );
 }

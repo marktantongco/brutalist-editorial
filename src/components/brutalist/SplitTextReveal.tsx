@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, createElement } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -49,7 +49,6 @@ export function SplitTextReveal({
           <span
             key={`${char}-${i}`}
             className="split-char inline-block"
-            style={{ willChange: 'transform, opacity' }}
           >
             {char === ' ' ? '\u00A0' : char}
           </span>

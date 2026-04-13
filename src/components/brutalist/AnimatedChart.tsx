@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -15,7 +15,6 @@ interface AnimatedBarChartProps {
  */
 export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
-  const [animated, setAnimated] = useState(false);
 
   useGSAP(
     () => {
@@ -35,7 +34,6 @@ export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChart
           start: 'top 80%',
           once: true,
         },
-        onComplete: () => setAnimated(true),
       });
 
       gsap.from(labels, {
@@ -55,7 +53,8 @@ export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChart
     { scope: chartRef }
   );
 
-  const maxValue = data.length > 0 ? Math.max(...data.map((d) => d.value)) : 1;
+  // Guard: prevent division by zero when all values are 0
+  const maxValue = data.length > 0 ? Math.max(...data.map((d) => d.value), 1) : 1;
 
   return (
     <div ref={chartRef} className={`flex items-end justify-center gap-3 md:gap-6 ${className}`}>
@@ -114,7 +113,8 @@ export function AnimatedDonut({ segments = [], size = 200, className = '' }: Ani
     { scope: donutRef }
   );
 
-  const total = segments.reduce((sum, s) => sum + s.value, 0);
+  // Guard: prevent division by zero when all segment values are 0
+  const total = segments.reduce((sum, s) => sum + s.value, 0) || 1;
   const radius = (size - 20) / 2;
   const circumference = 2 * Math.PI * radius;
 

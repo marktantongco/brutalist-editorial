@@ -22,22 +22,16 @@ export function ScrollProgress() {
         },
       });
 
-      // Initially hide until scrolled past hero
+      // Show/hide bar after scrolling past hero — single source of truth (inline style only)
       ScrollTrigger.create({
         trigger: document.body,
         start: 'top+=100 top',
-        toggleClass: { targets: barRef.current, className: 'opacity-100' },
-        onEnterBack: () => {
-          if (barRef.current) barRef.current.style.opacity = '0';
-        },
+        end: 'top+=120 top',
         onLeave: () => {
           if (barRef.current) barRef.current.style.opacity = '1';
         },
-        onLeaveBack: () => {
+        onEnterBack: () => {
           if (barRef.current) barRef.current.style.opacity = '0';
-        },
-        onEnter: () => {
-          if (barRef.current) barRef.current.style.opacity = '1';
         },
       });
     },

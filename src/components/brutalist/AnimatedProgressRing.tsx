@@ -22,9 +22,12 @@ export function AnimatedProgressRing({
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<SVGCircleElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
-  const radius = (size - strokeWidth) / 2;
+  // Guard: ensure radius is always positive
+  const radius = Math.max(1, (size - strokeWidth) / 2);
   const circumference = 2 * Math.PI * radius;
   const center = size / 2;
+  // Clamp value to [0, 100]
+  const clampedValue = Math.min(100, Math.max(0, value));
 
   useGSAP(
     () => {
@@ -39,9 +42,9 @@ export function AnimatedProgressRing({
       });
       gsap.set(text, { innerText: '0%' });
 
-      // Animate on scroll
+      // Animate on scroll — use direct DOM for counter text (no setState per frame)
       gsap.to(circle, {
-        strokeDashoffset: circumference - (value / 100) * circumference,
+        strokeDashoffset: circumference - (clampedValue / 100) * circumference,
         duration: 1.8,
         ease: 'power3.out',
         scrollTrigger: {
@@ -51,10 +54,10 @@ export function AnimatedProgressRing({
         },
       });
 
-      // Animate percentage text counting up
+      // Animate percentage text counting up via direct DOM
       const counter = { val: 0 };
       gsap.to(counter, {
-        val: value,
+        val: clampedValue,
         duration: 1.8,
         ease: 'power3.out',
         scrollTrigger: {
@@ -71,7 +74,7 @@ export function AnimatedProgressRing({
   );
 
   return (
-    <div ref={containerRef} className="flex flex-col items-center gap-2">
+    <div ref={containerRef} className="relative flex flex-col items-center gap-2">
       <svg width={size} height={size} className="transform -rotate-90">
         {/* Background track */}
         <circle
@@ -80,7 +83,7 @@ export function AnimatedProgressRing({
           r={radius}
           fill="none"
           stroke="currentColor"
-          strokeWidth={Math.max(5, strokeWidth)}
+          strokeWidth={Math.max(1, strokeWidth)}
           className="opacity-15"
         />
         {/* Animated progress */}
@@ -91,13 +94,13 @@ export function AnimatedProgressRing({
           r={radius}
           fill="none"
           stroke={color}
-          strokeWidth={Math.max(5, strokeWidth)}
+          strokeWidth={Math.max(1, strokeWidth)}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={circumference}
         />
       </svg>
-      {/* Center text */}
+      {/* Center text — now correctly positioned inside relative container */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span
           ref={textRef}

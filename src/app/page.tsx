@@ -7,12 +7,8 @@ import { gsap } from '@/lib/gsap-setup';
 import {
   ScrollReveal,
   ParallaxSection,
-  InfographicCounter,
-  MarqueeStrip,
   BrutalistCard,
-  TimelineSection,
   AnimatedBarChart,
-  AnimatedDonut,
   CustomCursor,
   GrainOverlay,
   TextScramble,
@@ -25,14 +21,11 @@ import {
 import {
   SEMINAR_META,
   HERO_STATS,
-  MARQUEE_ITEMS,
   FOUR_PILLARS,
   PHASES,
   WEEKLY_JOURNEY,
   SESSION_STRUCTURE,
   METHODOLOGY,
-  SUCCESS_METRICS,
-  METRIC_DONUT,
   ADAPTATION_CONTEXTS,
   RESOURCES,
   SCRIPTURE_VERSES,
@@ -665,8 +658,6 @@ function SessionStructureSection() {
     { scope: structRef }
   );
 
-  const dotColors = SESSION_STRUCTURE.map(s => s.color === '#1E1B18' ? '#7C9885' : s.color);
-
   return (
     <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20" style={{ contain: 'layout style paint' }}>
       <div className="max-w-5xl mx-auto">
@@ -1221,12 +1212,30 @@ export default function Home() {
         {/* ── CINEMATIC HERO ── */}
         <HeroSection />
 
-        {/* ── MARQUEE STRIP ── */}
-        <div className="border-y-3 border-pu-charcoal dark:border-pu-warm-white py-3 bg-pu-amber/30 dark:bg-amber-500/20">
-          <MarqueeStrip items={MARQUEE_ITEMS} speed={35} />
+        {/* Animated Ticker Strip */}
+        <div className="border-y-3 border-pu-charcoal dark:border-pu-warm-white py-3 bg-pu-amber/30 dark:bg-amber-500/20 overflow-hidden" aria-label="Seminar keywords ticker">
+          <div className="flex animate-[marquee_30s_linear_infinite] whitespace-nowrap">
+            {[...Array(2)].map((_, set) => (
+              <span key={set} className="flex items-center gap-6 mr-6 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] font-mono opacity-70">
+                <span>BIBLE STUDY</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>SCRIPTURE</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>SOAP METHOD</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>FILIPINO CHURCH</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>DISCIPLESHIP</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>12 WEEKS</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>4 PILLARS</span>
+                <span className="text-pu-terracotta">{'// '}</span>
+                <span>LIVING WORD</span>
+              </span>
+            ))}
+          </div>
         </div>
-
-        {/* ── ABOUT / EXECUTIVE SUMMARY ── */}
         <AboutSection />
 
         {/* ── 4-PILLAR ARCHITECTURE ── */}
