@@ -101,6 +101,31 @@
   --pu-shadow-yellow: 6px 6px 0px #FFEA00;
   --pu-font-display: 'Syne', system-ui, -apple-system, sans-serif;
   --pu-font-mono: 'Space Mono', 'Courier New', monospace;
+
+  /* ── Fluid Typography Scale ── */
+  --fluid-hero: clamp(3.5rem, 10vw + 1rem, 12rem);
+  --fluid-h1: clamp(2.5rem, 6vw + 0.5rem, 7rem);
+  --fluid-h2: clamp(2rem, 4vw + 0.5rem, 5rem);
+  --fluid-h3: clamp(1.25rem, 2vw + 0.25rem, 2rem);
+  --fluid-body: clamp(0.875rem, 0.5vw + 0.75rem, 1.125rem);
+  --fluid-small: clamp(0.6875rem, 0.3vw + 0.625rem, 0.875rem);
+  --fluid-micro: clamp(0.5625rem, 0.2vw + 0.5rem, 0.75rem);
+
+  /* ── Spacing System ── */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(1rem, 2vw, 1.5rem);
+  --space-md: clamp(2rem, 4vw, 4rem);
+  --space-lg: clamp(4rem, 8vw, 8rem);
+  --space-xl: clamp(6rem, 12vw, 12rem);
+
+  /* ── Animation Tokens ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+  --duration-cinematic: 1200ms;
 }
 
 .dark {
@@ -167,7 +192,34 @@
     text-decoration-color: var(--pu-yellow);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
+    font-family: var(--pu-font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: var(--fluid-h1);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-family: var(--pu-font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: var(--fluid-h2);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    font-family: var(--pu-font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: var(--fluid-h3);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  h4, h5, h6 {
     font-family: var(--pu-font-display);
     font-weight: 800;
     text-transform: uppercase;
@@ -313,7 +365,7 @@
 .label-tag {
   display: inline-block;
   font-family: var(--pu-font-mono);
-  font-size: 10px;
+  font-size: var(--fluid-micro);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -429,4 +481,116 @@ a:focus-visible {
     break-inside: avoid;
     contain: none !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════
+   UPGRADED DESIGN SYSTEM — Fluid + Animation + Mobile
+   ═══════════════════════════════════════════════════ */
+
+/* ── Fluid type utilities ── */
+.type-hero { font-size: var(--fluid-hero); }
+.type-h1 { font-size: var(--fluid-h1); }
+.type-h2 { font-size: var(--fluid-h2); }
+.type-h3 { font-size: var(--fluid-h3); }
+.type-body { font-size: var(--fluid-body); }
+.type-small { font-size: var(--fluid-small); }
+.type-micro { font-size: var(--fluid-micro); }
+
+/* ── Dramatic text effects ── */
+.text-outline-heavy {
+  -webkit-text-stroke: 4px currentColor;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-shadow-brutal {
+  text-shadow: 4px 4px 0px var(--pu-red), 8px 8px 0px var(--pu-yellow);
+}
+
+.dark .text-shadow-brutal {
+  text-shadow: 4px 4px 0px #FF4444, 8px 8px 0px var(--pu-yellow);
+}
+
+.text-shadow-yellow {
+  text-shadow: 3px 3px 0px var(--pu-yellow);
+}
+
+/* ── Hover lift effect ── */
+.hover-lift {
+  transition: transform var(--duration-normal) var(--ease-spring), box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--pu-shadow);
+}
+
+/* ── Reveal on scroll base ── */
+.will-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ── Animated gradient border ── */
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--pu-yellow); }
+  50% { border-color: var(--pu-red); }
+}
+
+.border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* ── Scroll snap for mobile journey ── */
+@media (max-width: 768px) {
+  .snap-x-mobile {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .snap-x-mobile > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+}
+
+/* ── Better dark mode transitions ── */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0ms;
+}
+
+/* Only transition these properties on interactive elements */
+a, button, input, [role="button"] {
+  transition-duration: var(--duration-normal);
+}
+
+/* ── Mobile bottom nav ── */
+@media (max-width: 767px) {
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--background);
+    border-top: 3px solid var(--pu-black);
+    padding: 8px 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+}
+
+/* ── Touch target minimum 44px ── */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ── Horizontal scroll section ── */
+.horizontal-scroll-section {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.horizontal-scroll-section::-webkit-scrollbar {
+  display: none;
 }

@@ -11,3 +11,6 @@ export { GrainOverlay } from './GrainOverlay';
 export { TextScramble } from './TextScramble';
 export { MagneticButton } from './MagneticButton';
 export { SmoothScroll } from './SmoothScroll';
+export { ScrollProgress } from './ScrollProgress';
+export { AnimatedProgressRing } from './AnimatedProgressRing';
+export { SplitTextReveal } from './SplitTextReveal';
