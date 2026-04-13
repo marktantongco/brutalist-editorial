@@ -4,15 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════
-   BRUTALIST EDITORIAL DESIGN SYSTEM
-   Theme tokens, typography, and animation utilities
+   powerUP SHOWCASE — NEO-BRUTALIST DESIGN SYSTEM
+   Brand tokens, typography, animation, and utilities
    ═══════════════════════════════════════════════════ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-syne);
+  --font-mono: var(--font-space-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,9 +46,15 @@
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
+  --color-pu-yellow: var(--pu-yellow);
+  --color-pu-red: var(--pu-red);
+  --color-pu-black: var(--pu-black);
+  --color-pu-white: var(--pu-white);
+  --color-pu-dark: var(--pu-dark);
+  --color-pu-gray: var(--pu-gray);
 }
 
-/* ── Brutalist palette tokens ── */
+/* ── powerUP Brand Palette ── */
 :root {
   --radius: 0px;
   --background: #FAFAFA;
@@ -63,38 +69,38 @@
   --secondary-foreground: #0A0A0A;
   --muted: #E5E5E5;
   --muted-foreground: #525252;
-  --accent: #FF0000;
-  --accent-foreground: #FFFFFF;
+  --accent: #FFEA00;
+  --accent-foreground: #000000;
   --destructive: #DC2626;
   --border: #000000;
   --input: #000000;
-  --ring: #000000;
-  --chart-1: #FF0000;
-  --chart-2: #0000FF;
-  --chart-3: #FFFF00;
-  --chart-4: #39FF14;
-  --chart-5: #FF00FF;
+  --ring: #FFEA00;
+  --chart-1: #FFEA00;
+  --chart-2: #CC0000;
+  --chart-3: #000000;
+  --chart-4: #FFFFFF;
+  --chart-5: #333333;
   --sidebar: #F5F5F5;
   --sidebar-foreground: #0A0A0A;
   --sidebar-primary: #000000;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #FF0000;
-  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-accent: #FFEA00;
+  --sidebar-accent-foreground: #000000;
   --sidebar-border: #000000;
-  --sidebar-ring: #000000;
+  --sidebar-ring: #FFEA00;
 
-  /* Brutalist-specific tokens */
-  --brutal-red: #FF0000;
-  --brutal-blue: #0000FF;
-  --brutal-yellow: #FFFF00;
-  --brutal-green: #39FF14;
-  --brutal-pink: #FF00FF;
-  --brutal-black: #000000;
-  --brutal-white: #FFFFFF;
-  --brutal-border: 3px solid #000000;
-  --brutal-shadow: 6px 6px 0px #FF0000;
-  --brutal-font-display: 'Geist', system-ui, -apple-system, sans-serif;
-  --brutal-font-mono: 'Geist Mono', 'Courier New', monospace;
+  /* powerUP brand tokens */
+  --pu-yellow: #FFEA00;
+  --pu-red: #CC0000;
+  --pu-black: #0A0A0A;
+  --pu-white: #FAFAFA;
+  --pu-dark: #1A1A1A;
+  --pu-gray: #888888;
+  --pu-border: 3px solid #0A0A0A;
+  --pu-shadow: 6px 6px 0px #CC0000;
+  --pu-shadow-yellow: 6px 6px 0px #FFEA00;
+  --pu-font-display: 'Syne', system-ui, -apple-system, sans-serif;
+  --pu-font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
 .dark {
@@ -104,73 +110,82 @@
   --card-foreground: #FAFAFA;
   --popover: #111111;
   --popover-foreground: #FAFAFA;
-  --primary: #FFFFFF;
+  --primary: #FAFAFA;
   --primary-foreground: #000000;
   --secondary: #1A1A1A;
   --secondary-foreground: #FAFAFA;
   --muted: #262626;
   --muted-foreground: #A3A3A3;
-  --accent: #FF0000;
-  --accent-foreground: #FFFFFF;
+  --accent: #FFEA00;
+  --accent-foreground: #000000;
   --destructive: #EF4444;
-  --border: #FFFFFF;
-  --input: #FFFFFF;
-  --ring: #FFFFFF;
-  --chart-1: #FF0000;
-  --chart-2: #3B82F6;
-  --chart-3: #FACC15;
-  --chart-4: #39FF14;
-  --chart-5: #E879F9;
+  --border: #FAFAFA;
+  --input: #FAFAFA;
+  --ring: #FFEA00;
+  --chart-1: #FFEA00;
+  --chart-2: #FF4444;
+  --chart-3: #FFFFFF;
+  --chart-4: #333333;
+  --chart-5: #CC0000;
   --sidebar: #1A1A1A;
   --sidebar-foreground: #FAFAFA;
-  --sidebar-primary: #FFFFFF;
+  --sidebar-primary: #FAFAFA;
   --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #FF0000;
-  --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #FFFFFF;
-  --sidebar-ring: #FFFFFF;
+  --sidebar-accent: #FFEA00;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #FAFAFA;
+  --sidebar-ring: #FFEA00;
 
-  --brutal-border: 3px solid #FFFFFF;
-  --brutal-shadow: 6px 6px 0px #FF0000;
+  --pu-border: 3px solid #FAFAFA;
+  --pu-shadow: 6px 6px 0px #FF4444;
+  --pu-shadow-yellow: 6px 6px 0px #FFEA00;
 }
 
-/* ── Base brutalist resets ── */
+/* ── Base resets ── */
 @layer base {
   * {
     @apply border-border outline-ring/50;
     border-radius: 0 !important;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--brutal-font-display);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  html {
+    scroll-behavior: smooth;
   }
 
-  /* Brutalist link style */
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--pu-font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
   a {
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
+    text-decoration-color: var(--pu-yellow);
   }
 
-  /* Brutalist heading defaults */
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 900;
+    font-family: var(--pu-font-display);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.02em;
-    line-height: 0.95;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
   }
 
-  /* Selection color */
+  code, pre, .font-mono {
+    font-family: var(--pu-font-mono);
+  }
+
   ::selection {
-    background: var(--brutal-red);
-    color: var(--brutal-white);
+    background: var(--pu-yellow);
+    color: var(--pu-black);
   }
 }
 
-/* ── Reduced motion accessibility ── */
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -180,7 +195,40 @@
   }
 }
 
-/* ── Utility: Text stroke for brutalist outlines ── */
+/* ── Grain texture overlay ── */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* ── Custom cursor dot ── */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--pu-black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease-out;
+}
+
+.dark .cursor-dot {
+  background: var(--pu-yellow);
+}
+
+/* ── Text stroke utilities ── */
 .text-stroke {
   -webkit-text-stroke: 2px currentColor;
   -webkit-text-fill-color: transparent;
@@ -191,23 +239,91 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* ── Utility: Marquee gap separator ── */
+.text-fill-yellow {
+  -webkit-text-fill-color: var(--pu-yellow);
+}
+
+.text-fill-red {
+  -webkit-text-fill-color: var(--pu-red);
+}
+
+/* ── Marquee separator ── */
 .marquee-sep::after {
   content: '//';
   margin: 0 0.5em;
   opacity: 0.3;
 }
 
-/* ── Utility: Grid lines overlay ── */
+/* ── Grid overlay ── */
 .grid-overlay {
   background-image:
-    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .dark .grid-overlay {
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+}
+
+/* ── Magnetic button base ── */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magnetic-btn:hover {
+  transform: translateY(-2px);
+}
+
+.magnetic-btn:active {
+  transform: translateY(1px);
+}
+
+/* ── Horizontal rule accent ── */
+.hr-accent {
+  border: none;
+  height: 3px;
+  background: var(--pu-black);
+}
+
+.hr-accent-yellow {
+  border: none;
+  height: 3px;
+  background: var(--pu-yellow);
+}
+
+/* ── Blend mode text ── */
+.text-blend-difference {
+  mix-blend-mode: difference;
+}
+
+/* ── Stagger animation utility ── */
+.stagger-in > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ── Label tag style ── */
+.label-tag {
+  display: inline-block;
+  font-family: var(--pu-font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 4px 12px;
+  border: 2px solid var(--pu-black);
+  background: var(--pu-yellow);
+}
+
+.dark .label-tag {
+  border-color: var(--pu-yellow);
+  background: var(--pu-yellow);
+  color: var(--pu-black);
 }
