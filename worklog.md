@@ -210,3 +210,20 @@
 ### Lint Status
 - 0 new errors from our changes
 - Pre-existing 6 errors in generate-seminar scripts (require imports) — not related to this fix
+
+---
+Task ID: 1
+Agent: Main Agent
+Task: Make PDF downloadable from web + Display deployment links
+
+Work Log:
+- Copied Living_Word_Seminar_Framework.pdf from /download/ to /public/ for static serving
+- Added handleDownloadPDF callback in CommissioningSection using programmatic anchor click with download attribute
+- Wired "Download Framework PDF" MagneticButton with onClick={handleDownloadPDF}
+- Added PDF download badge link in footer navigation (terracotta border, direct <a> with download attr)
+- Verified lint passes (only pre-existing errors in generate-seminar scripts)
+
+Stage Summary:
+- PDF is now accessible at /Living_Word_Seminar_Framework.pdf on both Vercel and GitHub Pages
+- Two download entry points: Commissioning CTA button + Footer badge
+- Deployment links: Vercel (brutalist-editorial.vercel.app) + GitHub Pages (marktantongco.github.io/brutalist-editorial)

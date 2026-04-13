@@ -1039,6 +1039,15 @@ function ResourcesSection() {
 function CommissioningSection() {
   const ctaRef = useRef<HTMLDivElement>(null);
 
+  const handleDownloadPDF = useCallback(() => {
+    const link = document.createElement('a');
+    link.href = '/Living_Word_Seminar_Framework.pdf';
+    link.download = 'Living_Word_Seminar_Framework.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, []);
+
   useGSAP(
     () => {
       if (!ctaRef.current) return;
@@ -1092,8 +1101,11 @@ function CommissioningSection() {
           <MagneticButton className="border-3 border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
             Start Your Journey
           </MagneticButton>
-          <MagneticButton className="border-3 border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer">
-            Download Framework
+          <MagneticButton
+            onClick={handleDownloadPDF}
+            className="border-3 border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer"
+          >
+            Download Framework PDF
           </MagneticButton>
         </div>
       </div>
@@ -1120,7 +1132,7 @@ function SeminarFooter() {
               A Transformative Bible Study Seminar // Filipino Christian Community
             </p>
           </div>
-          <div className="flex gap-4 md:gap-6 type-micro font-bold uppercase tracking-wider font-mono flex-wrap">
+          <div className="flex gap-4 md:gap-6 type-micro font-bold uppercase tracking-wider font-mono flex-wrap items-center">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.id}
@@ -1130,6 +1142,13 @@ function SeminarFooter() {
                 {link.label}
               </a>
             ))}
+            <a
+              href="/Living_Word_Seminar_Framework.pdf"
+              download="Living_Word_Seminar_Framework.pdf"
+              className="opacity-60 hover:opacity-100 transition-opacity no-underline border-2 border-pu-terracotta px-3 py-1 flex items-center gap-1.5"
+            >
+              PDF
+            </a>
           </div>
         </div>
         <div className="mt-6 pt-4 border-t-2 border-pu-charcoal/10 dark:border-pu-warm-white/10 flex flex-col md:flex-row justify-between items-center gap-2">
