@@ -134,3 +134,79 @@
 ## Lint & Build Status
 - ESLint: No new errors introduced (only pre-existing errors in generate scripts)
 - Dev server: Compiling successfully, all GET requests returning 200
+
+## Visual Audit Fix — $(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+### Files Modified
+1. `src/app/page.tsx` — Opacity, padding, mesh gradients, aria attributes
+2. `src/app/globals.css` — State specs, WCAG, mobile fixes, bottom nav
+3. `src/components/brutalist/AnimatedProgressRing.tsx` — Contrast fixes
+
+### ROOT CAUSE #1: Text Opacity Fixes (page.tsx)
+- **HeroSection**: Tagline `opacity-60` → `opacity-70`, Verse `opacity-80` → `opacity-85`, Stats labels `opacity-50` → `opacity-65`
+- **SeminarNavigation**: Nav links `opacity-60` → `opacity-80`
+- **MobileBottomNav**: `text-[9px]` → `text-[10px]`, `opacity-70` → `opacity-90`
+- **AboutSection**: Body text `opacity-80` → `opacity-85`, Sidebar label `opacity-50` → `opacity-65`
+- **PillarsSection**: Description `opacity-60` → `opacity-85`, Subtitle `opacity-40` → `opacity-65`, Expand button `opacity-60` → `opacity-80`, Expanded bullet label added `opacity-90`, Expanded bullet text `opacity-60` → `opacity-80`, Progress bar labels `opacity-40` → `opacity-65`, Section desc `opacity-60` → `opacity-85`
+- **JourneySection**: Phase weeks `opacity-50` → `opacity-65`, Phase focus `opacity-50` → `opacity-65`, Hover focus `opacity-60` → `opacity-75`
+- **SessionStructure**: Section desc `opacity-60` → `opacity-75`, Time labels `opacity-50` → `opacity-65`, Step desc `opacity-50` → `opacity-75`, Homework text `opacity-60` → `opacity-80`
+- **MethodologySection**: Description `opacity-60` → `opacity-85`
+- **MetricsSection**: Section desc `opacity-50` → `opacity-75`, Ring desc `opacity-40` → `opacity-65`, Bar chart desc `opacity-40` → `opacity-65`, Key results detail `opacity-50` → `opacity-75`
+- **AdaptationSection**: Modifications `opacity-70` → `opacity-85`, Faded cards `opacity-40` → `opacity-55`
+- **ResourcesSection**: Description `opacity-60` → `opacity-85`
+- **CommissioningSection**: Verse text `opacity-70` → `opacity-80`, Reference `opacity-50` → `opacity-65`
+- **SeminarFooter**: Description `opacity-50` → `opacity-65`, Links `opacity-40` → `opacity-60`, Copyright `opacity-30` → `opacity-50`
+
+### ROOT CAUSE #2: Dark Section Contrast (page.tsx)
+- Added warm mesh gradient overlays to PillarsSection, MetricsSection, ResourcesSection
+- Added `relative z-10` to inner containers for proper layering
+
+### ROOT CAUSE #3: Bottom Nav & Scroll-to-Top (page.tsx + globals.css)
+- Scroll-to-top: `fixed bottom-20 md:bottom-6 right-6` → `fixed bottom-24 right-4 z-40 w-11 h-11`
+- Bottom nav: Added `backdrop-filter: blur(12px)`, `background: rgba(250,245,238,0.95)`, increased safe-area padding to 12px
+- Mobile nav labels: `text-[9px]` → `text-[10px]`, `opacity-70` → `opacity-90`
+
+### ROOT CAUSE #4: Card Padding & Spacing (page.tsx)
+- Pillar cards: `p-5 md:p-6` → `p-4 md:p-6`
+- Session structure blocks: `p-5 md:p-6` → `p-4 md:p-6`
+- Methodology cards: `p-5 md:p-6` → `p-4 md:p-6`
+- Resources cards: `p-5 md:p-6` → `p-4 md:p-6`
+- About sidebar items: `p-4 md:p-5` → `p-3 md:p-5`
+- Key results box: `p-6 md:p-8` → `p-5 md:p-8`
+- All section headers: `mb-12 md:mb-16` → `mb-8 md:mb-16`
+- About grid: `gap-8 md:gap-12` → `gap-6 md:gap-12`
+
+### ROOT CAUSE #5: Phase Cards Scroll Hint (page.tsx)
+- Changed `min-w-[200px]` → `min-w-[180px]`
+- Added fade gradient on right edge for scrollability hint (mobile only)
+- Wrapped in relative container with absolute gradient overlay
+
+### ROOT CAUSE #6: Progress Ring Contrast (AnimatedProgressRing.tsx)
+- Track opacity `opacity-10` → `opacity-15`
+- Label opacity `opacity-50` → `opacity-90`
+- strokeWidth: enforced minimum 5px via `Math.max(5, strokeWidth)`
+
+### Mesh Gradient Enhancement (page.tsx)
+- HeroSection: Replaced simple radial gradient with 3-layer warm mesh gradient
+- PillarsSection, MetricsSection, ResourcesSection: Added 2-layer warm mesh overlays
+
+### Accessibility Enhancements (page.tsx + globals.css)
+- Added `aria-expanded` and `aria-controls` to pillar expand buttons
+- Added `aria-label="Scroll to begin exploring"` to hero scroll indicator
+- Added `role="tablist"` to adaptation context buttons
+- Added skip-link CSS for keyboard navigation
+- Added WCAG AA contrast documentation
+- Added focus-visible: 3px amber ring with 3px offset
+
+### State Spec Implementation (globals.css)
+- Hover: 150ms transition with ease curve
+- Press: 80ms scale(0.97)
+- Focus-visible: warm amber ring
+
+### 375px Mobile Fixes (globals.css)
+- `@media (max-width: 400px)`: tighter section padding (12px)
+- Hero font size: `clamp(2.5rem, 12vw + 1rem, 8rem)`
+
+### Lint Status
+- 0 new errors from our changes
+- Pre-existing 6 errors in generate-seminar scripts (require imports) — not related to this fix

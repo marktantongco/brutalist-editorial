@@ -80,8 +80,8 @@ export function AnimatedProgressRing({
           r={radius}
           fill="none"
           stroke="currentColor"
-          strokeWidth={strokeWidth}
-          className="opacity-10"
+          strokeWidth={Math.max(5, strokeWidth)}
+          className="opacity-15"
         />
         {/* Animated progress */}
         <circle
@@ -91,7 +91,7 @@ export function AnimatedProgressRing({
           r={radius}
           fill="none"
           stroke={color}
-          strokeWidth={strokeWidth}
+          strokeWidth={Math.max(5, strokeWidth)}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={circumference}
@@ -107,7 +107,7 @@ export function AnimatedProgressRing({
           0%
         </span>
         {label && (
-          <span className="text-[9px] uppercase tracking-[0.2em] font-mono opacity-50 mt-0.5">
+          <span className="text-[9px] uppercase tracking-[0.2em] font-mono opacity-90 mt-0.5">
             {label}
           </span>
         )}

@@ -79,7 +79,7 @@ function SeminarNavigation() {
             <a
               key={link.id}
               href={`#${link.id}`}
-              className="text-[10px] font-bold uppercase tracking-[0.2em] font-mono opacity-60 hover:opacity-100 transition-opacity no-underline"
+              className="text-[10px] font-bold uppercase tracking-[0.2em] font-mono opacity-80 hover:opacity-100 transition-opacity no-underline"
             >
               {link.label}
             </a>
@@ -104,7 +104,7 @@ function MobileBottomNav() {
             href={`#${link.id}`}
             className="flex flex-col items-center gap-0.5 py-1 px-2 no-underline text-center"
           >
-            <span className="text-[9px] font-bold uppercase tracking-wider opacity-70 hover:opacity-100">
+            <span className="text-[10px] font-bold uppercase tracking-wider opacity-90 hover:opacity-100">
               {link.label}
             </span>
           </a>
@@ -198,9 +198,13 @@ function HeroSection() {
 
   return (
     <section ref={heroRef} className="relative h-[100dvh] flex flex-col justify-center items-center px-4 md:px-8 grid-overlay overflow-hidden">
-      {/* Radial gradient bg that adds depth */}
+      {/* Mesh gradient bg that adds depth */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse at 50% 40%, var(--pu-amber)/[0.08] 0%, transparent 60%)',
+        background: `
+          radial-gradient(ellipse at 20% 50%, rgba(232,168,56,0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(196,69,54,0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 80%, rgba(124,152,133,0.05) 0%, transparent 50%)
+        `,
       }} />
 
       {/* Corner crosses */}
@@ -251,7 +255,7 @@ function HeroSection() {
         <div className="hero-tagline mt-6 md:mt-8">
           <TextScramble
             text="Knowing God Through Scripture — A 12-Week Transformative Journey"
-            className="font-mono text-xs md:text-sm max-w-xl mx-auto leading-relaxed opacity-60"
+            className="font-mono text-xs md:text-sm max-w-xl mx-auto leading-relaxed opacity-70"
           />
         </div>
 
@@ -260,7 +264,7 @@ function HeroSection() {
           {SCRIPTURE_VERSES.map((v, i) => (
             <p
               key={i}
-              className={`verse-item absolute font-mono text-[10px] md:text-xs italic opacity-80 max-w-md ${i === 0 ? '' : 'hidden'}`}
+              className={`verse-item absolute font-mono text-[10px] md:text-xs italic opacity-85 max-w-md ${i === 0 ? '' : 'hidden'}`}
             >
               &ldquo;{v.text}&rdquo; — <span className="font-bold not-italic">{v.ref}</span>
             </p>
@@ -275,7 +279,7 @@ function HeroSection() {
                 {stat.value}
                 <span className="text-pu-amber text-lg">{stat.suffix}</span>
               </span>
-              <span className="block text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-mono opacity-50 mt-1">
+              <span className="block text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-mono opacity-65 mt-1">
                 {stat.label}
               </span>
             </div>
@@ -294,8 +298,8 @@ function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-40 font-mono">
+      <div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" aria-label="Scroll to begin exploring">
+        <span className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-55 font-mono">
           Scroll to Begin
         </span>
         <div className="w-[1px] h-10 bg-gradient-to-b from-pu-charcoal/60 to-transparent dark:from-pu-warm-white/60 animate-pulse" />
@@ -334,7 +338,7 @@ function AboutSection() {
   return (
     <section id="about" ref={sectionRef} className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">About the Seminar</span>
             <h2 className="mt-4">
@@ -348,16 +352,16 @@ function AboutSection() {
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-12">
           {/* Main text with terracotta accent line */}
           <div className="lg:col-span-2 space-y-5 border-l-[4px] border-pu-terracotta pl-6 md:pl-8">
-            <p className="about-line type-body leading-relaxed opacity-80">
+            <p className="about-line type-body leading-relaxed opacity-85">
               The Living Word is a comprehensive 12-week program designed to equip Filipino Christian believers at every stage of spiritual maturity to know God deeply through His attributes, character, and abiding presence. Rooted in the rich tradition of evangelical Filipino church life, this seminar draws from real Bible study sessions that demonstrated the hunger of Filipino believers to encounter God not merely intellectually, but relationally and transformationally.
             </p>
-            <p className="about-line type-body leading-relaxed opacity-80">
+            <p className="about-line type-body leading-relaxed opacity-85">
               At the heart of this framework lies the SOAP inductive Bible study method — <span className="font-bold text-pu-amber bg-pu-charcoal dark:bg-pu-amber dark:text-pu-charcoal px-1">Scripture</span>, <span className="font-bold text-pu-amber bg-pu-charcoal dark:bg-pu-amber dark:text-pu-charcoal px-1">Observation</span>, <span className="font-bold text-pu-amber bg-pu-charcoal dark:bg-pu-amber dark:text-pu-charcoal px-1">Application</span>, and <span className="font-bold text-pu-amber bg-pu-charcoal dark:bg-pu-amber dark:text-pu-charcoal px-1">Prayer</span> — a systematic yet accessible approach that guides participants from textual engagement to personal obedience.
             </p>
-            <p className="about-line type-body leading-relaxed opacity-80">
+            <p className="about-line type-body leading-relaxed opacity-85">
               Built upon the 4-Pillar Architecture — Encounter, Exegesis, Examination, and Expression — the seminar mirrors the natural rhythm of spiritual growth. Each 90-minute session moves participants from corporate worship through deep textual study, into personal application and accountability, and finally out into missional expression, ensuring head knowledge is consistently translated into heart transformation.
             </p>
           </div>
@@ -373,8 +377,8 @@ function AboutSection() {
               { label: 'Aim', value: 'Head → Heart → Hands' },
             ].map((item, i) => (
               <ScrollReveal key={i} direction={i % 2 === 0 ? 'left' : 'right'} delay={i * 0.05}>
-                <div className="border-2 border-pu-charcoal dark:border-pu-warm-white p-4 md:p-5 flex justify-between items-center gap-4 hover:bg-pu-amber/10 dark:hover:bg-pu-amber/5 transition-colors">
-                  <span className="type-micro font-bold uppercase tracking-[0.2em] font-mono opacity-50">
+                <div className="border-2 border-pu-charcoal dark:border-pu-warm-white p-3 md:p-5 flex justify-between items-center gap-4 hover:bg-pu-amber/10 dark:hover:bg-pu-amber/5 transition-colors">
+                  <span className="type-micro font-bold uppercase tracking-[0.2em] font-mono opacity-65">
                     {item.label}
                   </span>
                   <span className="type-small font-bold text-right">
@@ -402,9 +406,15 @@ function PillarsSection() {
   const pillarColors = ['#E8A838', '#C44536', '#7C9885', '#D4B896'];
 
   return (
-    <section id="pillars" ref={pillarsRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal" style={{ contain: 'layout style paint' }}>
-      <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+    <section id="pillars" ref={pillarsRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+      <div className="absolute inset-0 pointer-events-none opacity-30" style={{
+        background: `
+          radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 100%, rgba(196,69,54,0.08) 0%, transparent 50%)
+        `,
+      }} />
+      <div className="max-w-6xl mx-auto relative z-10">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-pu-warm-white dark:border-pu-charcoal pb-4">
             <div>
               <span className="label-tag">Architecture</span>
@@ -416,7 +426,7 @@ function PillarsSection() {
                 </span>
               </h2>
             </div>
-            <p className="type-small max-w-sm opacity-60 font-mono">
+            <p className="type-small max-w-sm opacity-85 font-mono">
               Each pillar engages the whole person — head, heart, and hands — in a progression that mirrors biblical spiritual formation.
             </p>
           </div>
@@ -430,7 +440,7 @@ function PillarsSection() {
             <div className="bg-pu-warm-white dark:bg-pu-charcoal" style={{ width: '22.2%' }} title="Examination: 20min" />
             <div className="bg-pu-amber" style={{ width: '16.7%' }} title="Expression: 15min" />
           </div>
-          <div className="flex justify-between mt-2 type-micro font-mono uppercase tracking-wider opacity-40">
+          <div className="flex justify-between mt-2 type-micro font-mono uppercase tracking-wider opacity-65">
             <span>20 min</span>
             <span>35 min</span>
             <span>20 min</span>
@@ -461,7 +471,7 @@ function PillarsSection() {
             <ScrollReveal key={i} direction={i % 2 === 0 ? 'up' : 'left'} delay={i * 0.1}>
               <BrutalistCard
                 hoverShadow={`8px 8px 0px ${pillar.color}`}
-                className={`p-5 md:p-6 cursor-pointer ${activePillar === i ? 'border-glow' : ''}`}
+                className={`p-4 md:p-6 cursor-pointer ${activePillar === i ? 'border-glow' : ''}`}
                 borderColor={activePillar === i ? '#E8A838' : undefined}
               >
                 {/* Header */}
@@ -477,31 +487,33 @@ function PillarsSection() {
                   </span>
                 </div>
 
-                <p className="type-micro uppercase tracking-[0.3em] font-mono opacity-40 mb-3">
+                <p className="type-micro uppercase tracking-[0.3em] font-mono opacity-65 mb-3">
                   {pillar.subtitle}
                 </p>
 
-                <p className="text-xs md:text-sm leading-relaxed opacity-60 mb-4">
+                <p className="text-xs md:text-sm leading-relaxed opacity-85 mb-4">
                   {pillar.description}
                 </p>
 
                 {/* Expandable bullet points */}
                 <button
                   onClick={() => setActivePillar(activePillar === i ? null : i)}
-                  className="type-micro font-bold uppercase tracking-[0.2em] font-mono opacity-60 hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-2"
+                  aria-expanded={activePillar === i}
+                  aria-controls={`pillar-details-${i}`}
+                  className="type-micro font-bold uppercase tracking-[0.2em] font-mono opacity-80 hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-2"
                 >
                   <span className={`inline-block transition-transform ${activePillar === i ? 'rotate-45' : ''}`}>+</span>
                   {activePillar === i ? 'Collapse' : 'Details'}
                 </button>
 
                 {activePillar === i && (
-                  <div className="mt-4 space-y-3 border-t-2 border-pu-warm-white/20 dark:border-pu-charcoal/20 pt-4">
+                  <div className="mt-4 space-y-3 border-t-2 border-pu-warm-white/20 dark:border-pu-charcoal/20 pt-4" id={`pillar-details-${i}`}>
                     {pillar.points.map((point, j) => (
                       <div key={j} className="flex gap-3">
                         <span className="w-1.5 h-1.5 mt-1.5 flex-shrink-0" style={{ background: pillar.color === '#1E1B18' ? '#7C9885' : pillar.color }} />
                         <div>
-                          <span className="block text-xs font-bold uppercase">{point.label}</span>
-                          <span className="block text-[11px] opacity-60 mt-0.5">{point.text}</span>
+                          <span className="block text-xs font-bold uppercase opacity-90">{point.label}</span>
+                          <span className="block text-[11px] opacity-80 mt-0.5">{point.text}</span>
                         </div>
                       </div>
                     ))}
@@ -526,7 +538,7 @@ function JourneySection() {
   return (
     <section id="journey" ref={journeyRef} className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Journey Map</span>
             <h2 className="mt-4">
@@ -541,20 +553,24 @@ function JourneySection() {
         </ScrollReveal>
 
         {/* Phase overview cards — full-width horizontal scroll on mobile */}
-        <div className="snap-x-mobile flex md:grid md:grid-cols-4 gap-3 md:gap-4 mb-16 md:mb-24 pb-4 md:pb-0">
-          {PHASES.map((phase, i) => (
-            <ScrollReveal key={i} direction="up" delay={i * 0.1}>
-              <div className="border-2 border-pu-charcoal dark:border-pu-warm-white p-4 md:p-5 min-w-[200px] md:min-w-0" style={{ background: phase.color === '#1E1B18' ? undefined : `${phase.color}15` }}>
-                <span className="type-micro font-mono uppercase tracking-wider opacity-50 block mb-1">
-                  Weeks {phase.weeks}
-                </span>
-                <h3 className="text-lg md:text-xl font-black uppercase">{phase.name}</h3>
-                <p className="type-micro opacity-50 mt-1 font-mono leading-relaxed">
-                  {phase.focus}
-                </p>
-              </div>
-            </ScrollReveal>
-          ))}
+        <div className="relative">
+          <div className="snap-x-mobile flex md:grid md:grid-cols-4 gap-3 md:gap-4 mb-16 md:mb-24 pb-4 md:pb-0">
+            {PHASES.map((phase, i) => (
+              <ScrollReveal key={i} direction="up" delay={i * 0.1}>
+                <div className="border-2 border-pu-charcoal dark:border-pu-warm-white p-4 md:p-5 min-w-[180px] md:min-w-0" style={{ background: phase.color === '#1E1B18' ? undefined : `${phase.color}15` }}>
+                  <span className="type-micro font-mono uppercase tracking-wider opacity-65 block mb-1">
+                    Weeks {phase.weeks}
+                  </span>
+                  <h3 className="text-lg md:text-xl font-black uppercase">{phase.name}</h3>
+                  <p className="type-micro opacity-65 mt-1 font-mono leading-relaxed">
+                    {phase.focus}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+          {/* Fade gradient hint for scrollability on mobile */}
+          <div className="absolute top-0 right-0 bottom-0 w-12 bg-gradient-to-l from-pu-cream to-transparent dark:from-pu-charcoal dark:to-transparent md:hidden pointer-events-none" />
         </div>
 
         {/* Week-by-week grid with hover expand and "Currently: Week" indicator */}
@@ -581,7 +597,7 @@ function JourneySection() {
                     >
                       {String(week.week).padStart(2, '0')}
                     </span>
-                    <span className="text-[9px] font-mono uppercase tracking-wider opacity-40 px-2 py-0.5 border border-current">
+                    <span className="text-[9px] font-mono uppercase tracking-wider opacity-60 px-2 py-0.5 border border-current">
                       {week.phase}
                     </span>
                   </div>
@@ -590,7 +606,7 @@ function JourneySection() {
                   </h3>
                   <p className="text-[10px] font-mono text-pu-terracotta dark:text-red-400 mb-2">{week.scripture}</p>
                   {/* Focus text expands on hover */}
-                  <p className="text-[11px] leading-relaxed opacity-0 max-h-0 group-hover:opacity-60 group-hover:max-h-40 transition-all duration-300 overflow-hidden">
+                  <p className="text-[11px] leading-relaxed opacity-0 max-h-0 group-hover:opacity-75 group-hover:max-h-40 transition-all duration-300 overflow-hidden">
                     {week.focus}
                   </p>
                 </div>
@@ -654,7 +670,7 @@ function SessionStructureSection() {
   return (
     <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20" style={{ contain: 'layout style paint' }}>
       <div className="max-w-5xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Template</span>
             <h2 className="mt-4 text-pu-charcoal dark:text-pu-cream">
@@ -662,7 +678,7 @@ function SessionStructureSection() {
               <br />
               <span className="text-pu-terracotta">Structure</span>
             </h2>
-            <p className="type-small mt-3 opacity-60 font-mono max-w-xl">
+            <p className="type-small mt-3 opacity-75 font-mono max-w-xl">
               Every 90-minute session follows this reusable blueprint. Facilitators customize content while maintaining structural integrity.
             </p>
           </div>
@@ -690,8 +706,8 @@ function SessionStructureSection() {
             </div>
           </div>
           <div className="flex justify-between mt-2">
-            <span className="type-micro font-mono uppercase tracking-wider opacity-50">0:00</span>
-            <span className="type-micro font-mono uppercase tracking-wider opacity-50">1:30</span>
+            <span className="type-micro font-mono uppercase tracking-wider opacity-65">0:00</span>
+            <span className="type-micro font-mono uppercase tracking-wider opacity-65">1:30</span>
           </div>
         </div>
 
@@ -701,7 +717,7 @@ function SessionStructureSection() {
           <div className="absolute left-[7px] top-6 bottom-6 w-[2px] bg-pu-charcoal/20 dark:bg-pu-warm-white/20 hidden md:block" />
 
           {SESSION_STRUCTURE.map((session, i) => (
-            <div key={i} className="struct-block border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal p-5 md:p-6 relative" style={{ willChange: 'transform' }}>
+            <div key={i} className="struct-block border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal p-4 md:p-6 relative" style={{ willChange: 'transform' }}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   {/* Colored dot with connector */}
@@ -723,7 +739,7 @@ function SessionStructureSection() {
                     <span className="text-pu-terracotta font-black text-xs mt-0.5">{String(j + 1).padStart(2, '0')}</span>
                     <div>
                       <span className="block text-xs font-bold uppercase text-pu-charcoal dark:text-pu-cream">{step.title}</span>
-                      <span className="block text-[11px] opacity-50 font-mono mt-0.5">{step.desc}</span>
+                      <span className="block text-[11px] opacity-75 font-mono mt-0.5">{step.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -739,7 +755,7 @@ function SessionStructureSection() {
               <span className="w-6 h-6 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal flex items-center justify-center text-[10px] font-bold">HW</span>
               Homework (Between Sessions)
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs opacity-60 font-mono">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs opacity-80 font-mono">
               <span>Daily Scripture reading (5-day plan)</span>
               <span>Memory verse meditation</span>
               <span>Obedience step execution</span>
@@ -760,7 +776,7 @@ function MethodologySection() {
   return (
     <section id="method" className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Distinctives</span>
             <h2 className="mt-4">
@@ -778,7 +794,7 @@ function MethodologySection() {
             <ScrollReveal key={i} direction={i % 3 === 0 ? 'up' : i % 3 === 1 ? 'left' : 'right'} delay={i * 0.08}>
               <BrutalistCard
                 hoverShadow={`6px 6px 0px ${i % 2 === 0 ? '#E8A838' : '#C44536'}`}
-                className="p-5 md:p-6 h-full flex flex-col"
+                className="p-4 md:p-6 h-full flex flex-col"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-3xl font-black opacity-20">{method.number}</span>
@@ -790,7 +806,7 @@ function MethodologySection() {
                   className="text-base md:text-lg font-black uppercase mb-3"
                   stagger={0.04}
                 />
-                <p className="text-xs leading-relaxed opacity-60 flex-grow">{method.description}</p>
+                <p className="text-xs leading-relaxed opacity-85 flex-grow">{method.description}</p>
               </BrutalistCard>
             </ScrollReveal>
           ))}
@@ -806,9 +822,15 @@ function MethodologySection() {
 
 function MetricsSection() {
   return (
-    <section id="metrics" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal" style={{ contain: 'layout style paint' }}>
-      <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+    <section id="metrics" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+      <div className="absolute inset-0 pointer-events-none opacity-30" style={{
+        background: `
+          radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 100%, rgba(196,69,54,0.08) 0%, transparent 50%)
+        `,
+      }} />
+      <div className="max-w-6xl mx-auto relative z-10">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-pu-warm-white dark:border-pu-charcoal pb-4">
             <div>
               <span className="label-tag">Impact</span>
@@ -818,7 +840,7 @@ function MetricsSection() {
                 <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>Metrics</span>
               </h2>
             </div>
-            <p className="type-small max-w-sm opacity-50 font-mono">
+            <p className="type-small max-w-sm opacity-75 font-mono">
               Measurable indicators tracking both short-term engagement and long-term transformation across all participants.
             </p>
           </div>
@@ -842,7 +864,7 @@ function MetricsSection() {
                   />
                 </div>
                 <span className="mt-2 type-small font-bold uppercase tracking-wider">{ring.label}</span>
-                <span className="type-micro font-mono opacity-40">{ring.desc}</span>
+                <span className="type-micro font-mono opacity-65">{ring.desc}</span>
               </div>
             </ScrollReveal>
           ))}
@@ -853,7 +875,7 @@ function MetricsSection() {
           <ScrollReveal direction="left">
             <div className="border-2 border-pu-warm-white dark:border-pu-charcoal p-6 md:p-8">
               <h3 className="text-base md:text-lg font-black uppercase mb-2">Target Achievement</h3>
-              <p className="type-micro font-mono opacity-40 mb-6">Projected success rates — horizontal view</p>
+              <p className="type-micro font-mono opacity-65 mb-6">Projected success rates — horizontal view</p>
               <AnimatedBarChart
                 data={[
                   { label: 'Retention', value: 90, color: '#E8A838' },
@@ -869,7 +891,7 @@ function MetricsSection() {
 
           {/* Key Results summary box with border-glow */}
           <ScrollReveal direction="right">
-            <div className="border-2 border-pu-warm-white dark:border-pu-charcoal p-6 md:p-8 border-glow h-full flex flex-col justify-center">
+            <div className="border-2 border-pu-warm-white dark:border-pu-charcoal p-5 md:p-8 border-glow h-full flex flex-col justify-center">
               <h3 className="text-base md:text-lg font-black uppercase mb-4">Key Results</h3>
               <div className="space-y-4">
                 {[
@@ -882,7 +904,7 @@ function MetricsSection() {
                     <span className="text-pu-terracotta font-black text-sm mt-0.5">{String(i + 1).padStart(2, '0')}</span>
                     <div>
                       <span className="block text-sm font-bold uppercase">{result.metric}</span>
-                      <span className="block text-[11px] opacity-50 font-mono mt-0.5">{result.detail}</span>
+                      <span className="block text-[11px] opacity-75 font-mono mt-0.5">{result.detail}</span>
                     </div>
                   </div>
                 ))}
@@ -905,7 +927,7 @@ function AdaptationSection() {
   return (
     <section className="py-[var(--space-lg)] px-4 md:px-8" style={{ contain: 'layout style paint' }}>
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-3 border-pu-charcoal dark:border-pu-warm-white pb-4">
             <span className="label-tag">Flexibility</span>
             <h2 className="mt-4">
@@ -917,7 +939,7 @@ function AdaptationSection() {
         </ScrollReveal>
 
         {/* Context selector buttons — horizontal scrollable on mobile */}
-        <div className="horizontal-scroll-section flex md:flex-wrap gap-2 md:gap-3 mb-8 pb-2 md:pb-0">
+        <div className="horizontal-scroll-section flex md:flex-wrap gap-2 md:gap-3 mb-8 pb-2 md:pb-0" role="tablist">
           {ADAPTATION_CONTEXTS.map((ctx, i) => (
             <button
               key={i}
@@ -940,7 +962,7 @@ function AdaptationSection() {
               <div
                 className={`border-2 border-pu-charcoal dark:border-pu-warm-white p-5 transition-all duration-300 ${
                   activeContext === i ? 'bg-pu-amber/10 ring-2 ring-pu-amber' : ''
-                } ${activeContext !== null && activeContext !== i ? 'opacity-40' : ''}`}
+                } ${activeContext !== null && activeContext !== i ? 'opacity-55' : ''}`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xl">{ctx.emoji}</span>
@@ -949,7 +971,7 @@ function AdaptationSection() {
                 {(activeContext === i || activeContext === null) && (
                   <ul className="space-y-2">
                     {ctx.modifications.map((mod, j) => (
-                      <li key={j} className="flex gap-2 text-xs opacity-70">
+                      <li key={j} className="flex gap-2 text-xs opacity-85">
                         <span className="text-pu-terracotta font-black flex-shrink-0">{String(j + 1).padStart(2, '0')}</span>
                         {mod}
                       </li>
@@ -971,9 +993,15 @@ function AdaptationSection() {
 
 function ResourcesSection() {
   return (
-    <section id="resources" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal" style={{ contain: 'layout style paint' }}>
-      <div className="max-w-6xl mx-auto">
-        <ScrollReveal direction="up" className="mb-12 md:mb-16">
+    <section id="resources" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative" style={{ contain: 'layout style paint' }}>
+      <div className="absolute inset-0 pointer-events-none opacity-30" style={{
+        background: `
+          radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 100%, rgba(196,69,54,0.08) 0%, transparent 50%)
+        `,
+      }} />
+      <div className="max-w-6xl mx-auto relative z-10">
+        <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-2 border-pu-warm-white dark:border-pu-charcoal pb-4">
             <span className="label-tag">Tools</span>
             <h2 className="mt-4">
@@ -989,12 +1017,12 @@ function ResourcesSection() {
             <ScrollReveal key={i} direction={i % 2 === 0 ? 'up' : 'left'} delay={i * 0.08}>
               <BrutalistCard
                 hoverShadow={`6px 6px 0px ${i % 2 === 0 ? '#E8A838' : '#C44536'}`}
-                className="p-5 md:p-6 h-full hover-lift"
+                className="p-4 md:p-6 h-full hover-lift"
               >
                 <span className="text-2xl block mb-3">{res.icon}</span>
                 <h3 className="text-base md:text-lg font-black uppercase mb-1">{res.title}</h3>
                 <p className="type-micro font-mono text-pu-amber dark:text-amber-400 mb-3">{res.subtitle}</p>
-                <p className="text-xs leading-relaxed opacity-60">{res.description}</p>
+                <p className="text-xs leading-relaxed opacity-85">{res.description}</p>
               </BrutalistCard>
             </ScrollReveal>
           ))}
@@ -1052,11 +1080,11 @@ function CommissioningSection() {
           <br />
           <span className="text-pu-terracotta">Multiply</span>
         </h2>
-        <p className="commission-animate mt-6 md:mt-8 type-body max-w-lg mx-auto opacity-70 leading-relaxed font-mono text-pu-charcoal/70 dark:text-pu-cream/70">
+        <p className="commission-animate mt-6 md:mt-8 type-body max-w-lg mx-auto opacity-80 leading-relaxed font-mono text-pu-charcoal/80 dark:text-pu-cream/80">
           &ldquo;And the things you have heard me say in the presence of many witnesses entrust to reliable people
           who will also be qualified to teach others.&rdquo;
         </p>
-        <p className="commission-animate mt-2 text-xs font-bold font-mono text-pu-charcoal/50 dark:text-pu-cream/50">
+        <p className="commission-animate mt-2 text-xs font-bold font-mono text-pu-charcoal/65 dark:text-pu-cream/65">
           — 2 Timothy 2:2
         </p>
 
@@ -1088,7 +1116,7 @@ function SeminarFooter() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
             <h3 className="text-xl md:text-2xl font-black uppercase">The Living Word</h3>
-            <p className="type-micro mt-1 opacity-50 font-mono">
+            <p className="type-micro mt-1 opacity-65 font-mono">
               A Transformative Bible Study Seminar // Filipino Christian Community
             </p>
           </div>
@@ -1097,7 +1125,7 @@ function SeminarFooter() {
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className="opacity-40 hover:opacity-100 transition-opacity no-underline"
+                className="opacity-60 hover:opacity-100 transition-opacity no-underline"
               >
                 {link.label}
               </a>
@@ -1105,10 +1133,10 @@ function SeminarFooter() {
           </div>
         </div>
         <div className="mt-6 pt-4 border-t-2 border-pu-charcoal/10 dark:border-pu-warm-white/10 flex flex-col md:flex-row justify-between items-center gap-2">
-          <span className="type-micro uppercase tracking-[0.3em] opacity-30 font-mono">
+          <span className="type-micro uppercase tracking-[0.3em] opacity-50 font-mono">
             Prepared April 2026 // Taguig, Philippines
           </span>
-          <span className="type-micro uppercase tracking-[0.3em] opacity-30 font-mono">
+          <span className="type-micro uppercase tracking-[0.3em] opacity-50 font-mono">
             Built with faith &amp; powerUP // 2026
           </span>
         </div>
@@ -1116,7 +1144,7 @@ function SeminarFooter() {
         {/* Scroll to top button */}
         <button
           onClick={scrollToTop}
-          className="fixed bottom-20 md:bottom-6 right-6 z-40 w-10 h-10 border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-amber flex items-center justify-center font-black text-sm cursor-pointer hover:-translate-y-1 transition-transform duration-200 md:hidden"
+          className="fixed bottom-24 right-4 z-40 w-11 h-11 border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-amber flex items-center justify-center font-black text-sm cursor-pointer hover:-translate-y-1 transition-transform duration-200 md:hidden"
           aria-label="Scroll to top"
         >
           ↑
