@@ -7,34 +7,38 @@ const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  preload: true,
+  display: "swap",
 });
 
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   subsets: ["latin"],
   weight: ["400", "700"],
+  preload: true,
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "powerUP Showcase — Neo-Brutalist Interactive Template",
+  title: "The Living Word — Transformative Bible Study Seminar",
   description:
-    "A high-impact neo-brutalist editorial template with GSAP scroll animations, animated infographics, and kinetic typography. Built by powerUP — AI tools, digital products, web experiences.",
+    "A comprehensive 12-week Bible study seminar for the Filipino Christian community. Using the SOAP inductive method and 4-Pillar Architecture to know God deeply through Scripture, with animated infographics and cinematic scroll experience.",
   keywords: [
-    "powerUP",
-    "neo-brutalist",
-    "editorial template",
+    "Bible study",
+    "Filipino church",
+    "SOAP method",
+    "inductive Bible study",
+    "12-week seminar",
+    "Christian discipleship",
+    "small group",
+    "spiritual formation",
+    "Scripture engagement",
+    "Filipino Christian",
+    "Taguig",
+    "Living Word seminar",
+    "4-Pillar Architecture",
     "GSAP animations",
-    "scroll-driven",
-    "infographic",
-    "kinetic typography",
-    "Next.js",
-    "Tailwind CSS",
-    "interactive template",
-    "web design",
-    "motion design",
-    "brutalist template",
-    "animated infographic",
-    "scroll animation",
+    "interactive web app",
   ],
   authors: [
     { name: "Mark Tantongco", url: "https://github.com/marktantongco" },
@@ -49,24 +53,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://brutalist-editorial.vercel.app",
-    title: "powerUP Showcase — Neo-Brutalist Interactive Template",
+    title: "The Living Word — Transformative Bible Study Seminar",
     description:
-      "Scroll-driven neo-brutalist editorial with animated data visualization, kinetic typography, and GSAP motion transitions.",
-    siteName: "powerUP Showcase",
+      "A 12-week interactive Bible study seminar for Filipino believers. SOAP inductive method, 4-Pillar Architecture, and cinematic scroll experience with animated infographics.",
+    siteName: "The Living Word Seminar",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "powerUP Showcase — Neo-Brutalist Interactive Template",
+        alt: "The Living Word — Transformative Bible Study Seminar",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "powerUP Showcase — Neo-Brutalist Interactive Template",
+    title: "The Living Word — Transformative Bible Study Seminar",
     description:
-      "Scroll-driven neo-brutalist editorial with animated infographics and motion transitions.",
+      "12-week interactive Bible study seminar with animated infographics and cinematic scroll experience.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -100,25 +104,30 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: "powerUP Showcase",
+              "@type": "EducationalEvent",
+              name: "The Living Word: A Transformative Bible Study Seminar",
               description:
-                "Neo-brutalist interactive editorial template with GSAP scroll animations",
-              url: "https://brutalist-editorial.vercel.app",
-              author: {
-                "@type": "Person",
-                name: "Mark Tantongco",
-                url: "https://github.com/marktantongco",
+                "A comprehensive 12-week Bible study seminar for Filipino Christian believers using the SOAP inductive method.",
+              organizer: {
+                "@type": "Organization",
+                name: "powerUP",
               },
-              creator: { "@type": "Organization", name: "powerUP" },
-              applicationCategory: "DesignApplication",
-              operatingSystem: "Web",
-              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                ratingCount: "2847",
+              location: {
+                "@type": "Place",
+                name: "Filipino Christian Community",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Taguig",
+                  addressCountry: "PH",
+                },
               },
+              duration: "P84D",
+              educationalLevel: "All Levels",
+              educationalFramework: "SOAP Inductive Bible Study Method",
+              inLanguage: ["en", "fil"],
+              startDate: "2026-04-01",
+              endDate: "2026-06-24",
+              offers: { "@type": "Offer", price: "0", priceCurrency: "PHP" },
             }),
           }}
         />

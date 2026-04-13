@@ -327,3 +327,106 @@
   background: var(--pu-yellow);
   color: var(--pu-black);
 }
+
+/* ═══════════════════════════════════════════════════
+   LIVING WORD SEMINAR — Additional Styles
+   ═══════════════════════════════════════════════════ */
+
+/* ── Section containment for speed ── */
+section[style*="contain"] {
+  contain: layout style paint;
+}
+
+/* ── Animated underline for nav links ── */
+nav a {
+  position: relative;
+  text-decoration: none !important;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--pu-yellow);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ── Sticky nav backdrop ── */
+nav {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+/* ── Scripture verse fade transition ── */
+.verse-item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ── Session structure time bar segments ── */
+.time-bar > div {
+  transition: opacity 0.2s ease;
+}
+
+.time-bar > div:hover {
+  opacity: 0.8;
+}
+
+/* ── Pillar card expansion animation ── */
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    padding-top: 1rem;
+    padding-bottom: 0;
+  }
+}
+
+/* ── Smooth scroll padding for fixed nav ── */
+html {
+  scroll-padding-top: 70px;
+}
+
+/* ── Skeleton loading animation ── */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+/* ── Infographic bar chart dark mode fix ── */
+.dark .bar-fill {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ── Button focus states for accessibility ── */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--pu-yellow);
+  outline-offset: 2px;
+}
+
+/* ── Print styles ── */
+@media print {
+  .grain-overlay,
+  .cursor-dot,
+  nav {
+    display: none !important;
+  }
+
+  section {
+    break-inside: avoid;
+    contain: none !important;
+  }
+}
