@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -50,6 +50,19 @@ export function SplitTextReveal({
     },
     { scope: containerRef }
   );
+
+  // Safety timeout: force all split chars visible after 3s
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const timeout = setTimeout(() => {
+      if (!containerRef.current) return;
+      const chars = containerRef.current.querySelectorAll('.split-char');
+      gsap.set(chars, { opacity: 1, y: 0, clearProps: 'all' });
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const Tag = tag as string;
 

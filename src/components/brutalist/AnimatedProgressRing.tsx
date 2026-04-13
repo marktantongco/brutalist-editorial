@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -84,6 +84,21 @@ export function AnimatedProgressRing({
     },
     { scope: containerRef }
   );
+
+  // Safety timeout: force progress ring to final state after 3s
+  useEffect(() => {
+    if (!circleRef.current || !textRef.current) return;
+
+    const timeout = setTimeout(() => {
+      gsap.set(circleRef.current, {
+        strokeDashoffset: circumference - (clampedValue / 100) * circumference,
+        clearProps: 'all',
+      });
+      textRef.current.textContent = `${clampedValue}%`;
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [clampedValue, circumference]);
 
   return (
     <div ref={containerRef} className="relative flex flex-col items-center gap-2">

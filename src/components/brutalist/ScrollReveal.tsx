@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -80,6 +80,20 @@ export function ScrollReveal({
     },
     { scope: containerRef }
   );
+
+  // Safety timeout: force all animated children visible after 3s
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const timeout = setTimeout(() => {
+      if (!containerRef.current) return;
+      const targets = containerRef.current.querySelectorAll('.reveal-child');
+      const elements = targets.length > 0 ? targets : [containerRef.current];
+      gsap.set(elements, { opacity: 1, x: 0, y: 0, clearProps: 'all' });
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div ref={containerRef} className={className}>

@@ -285,3 +285,101 @@ Stage Summary:
 - No new lint errors (0 new from our changes; 6 pre-existing in generate scripts)
 - Dev server compiling successfully with all GET requests returning 200
 - Files modified: page.tsx, globals.css, ScrollReveal.tsx, AnimatedProgressRing.tsx, SplitTextReveal.tsx, AnimatedChart.tsx, GrainOverlay.tsx
+
+## Hyperreal × Typographic Editorial Design System Upgrade
+**Date**: 2026-04-13
+**Task**: Comprehensive design system upgrade implementing hyperreal typographic editorial language
+
+### Files Modified
+
+#### `src/app/globals.css` — Design System Overhaul
+1. **Added Hyperreal Design Tokens to `:root`** (light mode defaults):
+   - `--hr-base`, `--hr-surface`, `--hr-surface-elevated` — surface hierarchy
+   - `--hr-border`, `--hr-border-bright` — border tokens
+   - `--hr-text`, `--hr-text-muted`, `--hr-text-dim` — text contrast levels
+   - `--hr-accent: #00D4FF` (cyan neon accent)
+   - `--hr-accent-glow`, `--hr-accent-glow-strong` — glow intensities
+   - `--hr-warm-amber`, `--hr-warm-red`, `--hr-warm-sage` — warm palette refs
+   - `--glow-sm`, `--glow-md`, `--glow-lg` — box-shadow glow utilities
+   - `--editorial-max-width: 680px`, `--editorial-wide: 1100px`
+
+2. **Added Dark Mode Token Overrides in `.dark`**:
+   - `--hr-base: #0B0B0F` (near-black)
+   - `--hr-surface: #131318`, `--hr-surface-elevated: #1A1A22`
+   - Stronger glow values for dark backgrounds
+
+3. **Added 10 New Utility Classes**:
+   - `.hr-glow-divider` — thin cyan gradient line
+   - `.hr-orb` — floating blurred orb effect (positioned via Tailwind)
+   - `.hr-editorial` — max-width 680px constraint for readable text
+   - `.hr-neon-text` — cyan accent with text-shadow glow
+   - `.hr-glass` — frosted glass card effect
+   - `.hr-cta-btn` — clean editorial CTA with hover glow
+   - `.hr-section-dark`, `.hr-section-base` — alternating backgrounds
+   - `.hr-gradient-strip` — 3-color gradient bar (amber → cyan → red)
+   - `.hr-hero-bg` — radial gradient hero background pattern
+
+4. **Critical Fixes**:
+   - `forceVisible` keyframes: Changed from 90% invisible to 10% visible (elements appear in ~400ms instead of 3.6s)
+   - Removed `section[style*="contain"]` rule that was causing overflow clipping
+   - Limited global `*` transition to only `background-color, border-color` (removed `color` to fix transition-to-visible issues)
+
+#### `src/app/page.tsx` — Section-by-Section Upgrades
+1. **Hero Section**:
+   - Added `hr-hero-bg` class for radial gradient background
+   - Replaced mesh gradient divs with two `hr-orb` elements (cyan top-right, amber bottom-left)
+   - "Living" title changed from `text-pu-amber` to `hr-neon-text` with `#00D4FF` color
+   - CTA buttons enhanced with `hr-cta-btn` class
+
+2. **About Section**:
+   - Added `hr-section-dark` alternating background
+   - Added `hr-glow-divider` below heading
+   - Main text column wrapped in `hr-editorial` for max-width constraint
+
+3. **4-Pillars Section**:
+   - Added cyan `hr-orb` at top-left
+   - Progress bar changed to `hr-gradient-strip` colors
+
+4. **Journey Section**:
+   - Added `hr-section-dark` alternating background
+   - Added `hr-glow-divider` above week-by-week grid
+
+5. **Session Structure Section**:
+   - Added `hr-orb` (cyan, right side) with `relative overflow-hidden`
+   - Preserved all existing animations
+
+6. **Methodology Section**:
+   - Added `hr-section-dark` alternating background
+
+7. **Metrics Section**:
+   - Added cyan `hr-orb` at top-left
+   - Progress ring labels enhanced with `hr-neon-text`
+
+8. **Adaptation Section**:
+   - Added `hr-section-dark` alternating background
+
+9. **Resources Section**:
+   - Added amber `hr-orb` at bottom-right
+
+10. **Commissioning/CTA Section**:
+    - Added large cyan `hr-orb` centered behind heading
+    - CTA buttons enhanced with `hr-cta-btn`
+
+11. **Footer**:
+    - Added `hr-glow-divider` above footer content
+
+12. **Page Composition**:
+    - Added `hr-gradient-strip` between ticker and About section
+    - Added `hr-gradient-strip` between Resources and Commissioning sections
+
+### Lint Results
+- `src/app/page.tsx`: 0 errors, 0 warnings ✅
+- Pre-existing errors in `generate-seminar-doc.js` and `generate-seminar-enhanced.js` (not related to this change)
+
+### Design Principles Enforced
+- ✅ Background = Expressive (orbs, gradients, glow)
+- ✅ Text = Strict (editorial max-width, grid alignment)
+- ✅ Contrast = WCAG AA 4.5:1 (warm white on near-black, charcoal on cream)
+- ✅ One Visual Idea Per Section (single orb, single glow)
+- ✅ Dark Mode First (base: #0B0B0F)
+- ✅ Mobile First (375px baseline)

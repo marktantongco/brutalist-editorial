@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '@/lib/gsap-setup';
 
@@ -64,6 +64,21 @@ export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChart
     },
     { scope: chartRef }
   );
+
+  // Safety timeout: force bars and labels visible after 3s
+  useEffect(() => {
+    if (!chartRef.current) return;
+
+    const timeout = setTimeout(() => {
+      if (!chartRef.current) return;
+      const bars = chartRef.current.querySelectorAll('.bar-fill');
+      const labels = chartRef.current.querySelectorAll('.bar-label');
+      gsap.set(bars, { scaleY: 1, clearProps: 'all' });
+      gsap.set(labels, { opacity: 1, y: 0, clearProps: 'all' });
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   // Guard: prevent division by zero when all values are 0
   const maxValue = data.length > 0 ? Math.max(...data.map((d) => d.value), 1) : 1;

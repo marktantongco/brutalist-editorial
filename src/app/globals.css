@@ -149,6 +149,31 @@
   --duration-normal: 300ms;
   --duration-slow: 600ms;
   --duration-cinematic: 1200ms;
+
+  /* ── HYPERREAL DESIGN SYSTEM TOKENS ── */
+  --hr-base: #FAF5EE;
+  --hr-surface: #F5EDE3;
+  --hr-surface-elevated: #FFFFFF;
+  --hr-border: rgba(30,27,24,0.08);
+  --hr-border-bright: rgba(30,27,24,0.15);
+  --hr-text: #1E1B18;
+  --hr-text-muted: rgba(30,27,24,0.6);
+  --hr-text-dim: rgba(30,27,24,0.35);
+  --hr-accent: #00D4FF;
+  --hr-accent-glow: rgba(0,212,255,0.08);
+  --hr-accent-glow-strong: rgba(0,212,255,0.15);
+  --hr-warm-amber: #E8A838;
+  --hr-warm-red: #C44536;
+  --hr-warm-sage: #7C9885;
+
+  /* Glow utilities */
+  --glow-sm: 0 0 20px rgba(0,212,255,0.05);
+  --glow-md: 0 0 40px rgba(0,212,255,0.08);
+  --glow-lg: 0 0 60px rgba(0,212,255,0.12);
+
+  /* Editorial spacing */
+  --editorial-max-width: 680px;
+  --editorial-wide: 1100px;
 }
 
 /* ── Warm Dark Mode ── */
@@ -196,6 +221,21 @@
   --pu-border: 3px solid #F5EDE3;
   --pu-shadow: 6px 6px 0px #E05A4E;
   --pu-shadow-yellow: 6px 6px 0px #E8A838;
+
+  /* ── HYPERREAL DARK MODE TOKENS ── */
+  --hr-base: #0B0B0F;
+  --hr-surface: #131318;
+  --hr-surface-elevated: #1A1A22;
+  --hr-border: rgba(255,255,255,0.08);
+  --hr-border-bright: rgba(255,255,255,0.15);
+  --hr-text: #F5F0E8;
+  --hr-text-muted: rgba(245,240,232,0.65);
+  --hr-text-dim: rgba(245,240,232,0.4);
+  --hr-accent-glow: rgba(0,212,255,0.15);
+  --hr-accent-glow-strong: rgba(0,212,255,0.3);
+  --glow-sm: 0 0 20px rgba(0,212,255,0.1);
+  --glow-md: 0 0 40px rgba(0,212,255,0.15);
+  --glow-lg: 0 0 60px rgba(0,212,255,0.2);
 }
 
 /* ── Base resets ── */
@@ -221,6 +261,12 @@
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
     text-decoration-color: var(--pu-amber);
+  }
+
+  /* ── Body text readability ── */
+  p {
+    line-height: 1.65;
+    max-width: 72ch;
   }
 
   h1 {
@@ -314,12 +360,20 @@
 /* ── Text stroke utilities ── */
 .text-stroke {
   -webkit-text-stroke: 2px currentColor;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: currentColor;
+  color: var(--pu-charcoal);
+}
+.dark .text-stroke {
+  color: var(--pu-warm-white);
 }
 
 .text-stroke-thick {
   -webkit-text-stroke: 3px currentColor;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: currentColor;
+  color: var(--pu-charcoal);
+}
+.dark .text-stroke-thick {
+  color: var(--pu-warm-white);
 }
 
 .text-fill-yellow {
@@ -417,10 +471,7 @@
    LIVING WORD SEMINAR — Additional Styles
    ═══════════════════════════════════════════════════ */
 
-/* ── Section containment for speed ── */
-section[style*="contain"] {
-  contain: layout style paint;
-}
+/* ── Section containment removed — was causing overflow clipping ── */
 
 /* ── Animated underline for nav links ── */
 nav a {
@@ -498,7 +549,7 @@ html {
 /* ── Button focus states for accessibility (warm amber) ── */
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid var(--pu-amber);
+  outline: 2px solid var(--pu-amber);
   outline-offset: 2px;
 }
 
@@ -506,13 +557,32 @@ a:focus-visible {
 @media print {
   .grain-overlay,
   .cursor-dot,
-  nav {
+  .nav,
+  .mobile-bottom-nav,
+  .scroll-progress,
+  .hero-scroll {
     display: none !important;
   }
 
   section {
     break-inside: avoid;
     contain: none !important;
+    padding: 1rem 0 !important;
+  }
+
+  .type-hero {
+    font-size: 3rem !important;
+  }
+
+  /* Ensure all text is black on white for printing */
+  .text-stroke, .text-stroke-thick {
+    -webkit-text-fill-color: #000 !important;
+    -webkit-text-stroke-color: #000 !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
   }
 }
 
@@ -525,7 +595,7 @@ a:focus-visible {
 .type-h1 { font-size: var(--fluid-h1); }
 .type-h2 { font-size: var(--fluid-h2); }
 .type-h3 { font-size: var(--fluid-h3); }
-.type-body { font-size: var(--fluid-body); line-height: 1.7; letter-spacing: 0.01em; }
+.type-body { font-size: var(--fluid-body); line-height: 1.6; letter-spacing: 0.01em; }
 .type-small { font-size: var(--fluid-small); }
 .type-micro { font-size: var(--fluid-micro); }
 
@@ -586,7 +656,7 @@ a:focus-visible {
 
 /* ── Better dark mode transitions ── */
 * {
-  transition-property: background-color, border-color, color;
+  transition-property: background-color, border-color;
   transition-duration: 0ms;
 }
 
@@ -678,6 +748,46 @@ a, button, input, [role="button"] {
   .type-hero {
     font-size: clamp(2.5rem, 12vw + 1rem, 8rem) !important;
   }
+
+  /* Ensure nav links are tappable */
+  .mobile-bottom-nav a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Reduce border thickness on small phones for less visual weight */
+  .border-2 {
+    border-width: 1.5px !important;
+  }
+
+  /* Ensure text doesn't overflow */
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Reduce watermark size on tiny screens */
+  .hero-watermark span {
+    font-size: 10rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   LANDSCAPE PHONE FIXES
+   ═══════════════════════════════════════════════════ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-scroll {
+    display: none;
+  }
+
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -717,22 +827,24 @@ a, button, input, [role="button"] {
    STATE SPEC: Interactive States
    ═══════════════════════════════════════════════════ */
 
-/* Hover: 150ms transition */
+/* Hover: 150ms ease-out */
 a, button, [role="button"], .group {
   transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-timing-function: ease-out;
+  transition-property: color, background-color, border-color, transform, box-shadow, opacity;
 }
 
-/* Press: 80ms scale */
+/* Press: 80ms scale(0.97) */
 a:active, button:active, [role="button"]:active {
-  transform: scale(0.97);
+  transform: scale(0.97) !important;
   transition-duration: 80ms;
+  transition-timing-function: ease-in;
 }
 
-/* Focus-visible: warm amber ring */
+/* Focus-visible ring — warm amber 2px with 2px offset */
 *:focus-visible {
-  outline: 3px solid var(--pu-amber);
-  outline-offset: 3px;
+  outline: 2px solid var(--pu-amber);
+  outline-offset: 2px;
 }
 
 /* Skip to content link for keyboard nav */
@@ -757,4 +869,177 @@ a:active, button:active, [role="button"]:active {
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════════════
+   CRITICAL FIXES — Visibility & Contrast Safety
+   ═══════════════════════════════════════════════════ */
+
+/* ── CRITICAL: No-JS fallback — all content visible by default ── */
+noscript + main .reveal-child,
+noscript + main .about-line,
+noscript + main .struct-block,
+noscript + main .commission-animate,
+noscript + main .split-char {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+/* ── CRITICAL: GSAP animation safety net — elements visible after 4s even if animation fails ── */
+@keyframes forceVisible {
+  0%, 5% { opacity: 0; }
+  10% { opacity: 1; transform: none; clip-path: none; }
+  100% { opacity: 1; transform: none; clip-path: none; }
+}
+
+.about-line,
+.struct-block,
+.commission-animate,
+.split-char {
+  animation: forceVisible 4s ease forwards;
+}
+
+/* ── CRITICAL: Minimum text contrast enforcement ── */
+.opacity-85 {
+  opacity: 0.92;
+}
+.opacity-80 {
+  opacity: 0.88;
+}
+.opacity-75 {
+  opacity: 0.82;
+}
+
+/* Dark mode text safety — ensure minimum contrast */
+.dark .opacity-85 {
+  opacity: 0.95;
+}
+.dark .opacity-80 {
+  opacity: 0.9;
+}
+.dark .opacity-75 {
+  opacity: 0.85;
+}
+
+/* ── Bottom safe area for mobile bottom nav ── */
+main {
+  padding-bottom: 60px;
+}
+@media (min-width: 768px) {
+  main {
+    padding-bottom: 0;
+  }
+}
+
+/* ── Ensure stroke text is always readable ── */
+.hero-title-2 {
+  -webkit-text-fill-color: var(--pu-amber) !important;
+}
+.hero-title-3 {
+  -webkit-text-fill-color: var(--pu-charcoal) !important;
+}
+.dark .hero-title-3 {
+  -webkit-text-fill-color: var(--pu-warm-white) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   HYPERREAL × TYPOGRAPHIC EDITORIAL UTILITIES
+   ═══════════════════════════════════════════════════ */
+
+/* Glowing divider — thin cyan line */
+.hr-glow-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--hr-accent), transparent);
+  opacity: 0.5;
+}
+
+/* Orb background effect */
+.hr-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.dark .hr-orb {
+  opacity: 0.25;
+}
+
+/* Editorial body text — max-width constrained, readable */
+.hr-editorial {
+  max-width: var(--editorial-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Neon text accent */
+.hr-neon-text {
+  color: var(--hr-accent);
+  text-shadow: 0 0 20px var(--hr-accent-glow);
+}
+
+.dark .hr-neon-text {
+  text-shadow: 0 0 30px var(--hr-accent-glow-strong);
+}
+
+/* Glass card effect */
+.hr-glass {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--hr-border);
+}
+
+:root:not(.dark) .hr-glass {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--hr-border);
+}
+
+/* CTA button — one action, clean */
+.hr-cta-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 1px solid var(--hr-border-bright);
+  text-decoration: none;
+  color: var(--hr-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  transition: all 200ms ease;
+}
+
+.hr-cta-btn:hover {
+  border-color: var(--hr-accent);
+  box-shadow: var(--glow-sm);
+  transform: translateY(-2px);
+}
+
+/* Section bg transitions — alternating dark surface */
+.hr-section-dark {
+  background: var(--hr-surface);
+}
+
+.hr-section-base {
+  background: var(--hr-base);
+}
+
+/* Floating gradient strip */
+.hr-gradient-strip {
+  height: 2px;
+  background: linear-gradient(90deg, var(--hr-warm-amber), var(--hr-accent), var(--hr-warm-red));
+  border: none;
+}
+
+/* Pattern interrupt — hero bg */
+.hr-hero-bg {
+  background: radial-gradient(circle at 30% 30%, rgba(0,212,255,0.08), transparent 50%),
+              radial-gradient(circle at 70% 70%, rgba(232,168,56,0.06), transparent 50%);
+}
+
+.dark .hr-hero-bg {
+  background: radial-gradient(circle at 30% 30%, rgba(0,212,255,0.15), transparent 50%),
+              radial-gradient(circle at 70% 70%, rgba(232,168,56,0.08), transparent 50%);
 }

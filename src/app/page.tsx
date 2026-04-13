@@ -134,9 +134,12 @@ function HeroSection() {
         .from('.hero-scroll', { opacity: 0, y: 20, duration: 0.5 }, '-=0.2')
         .from('.hero-watermark', { opacity: 0, duration: 2.0, ease: 'power1.out' }, '-=1.5');
 
-      // Subtle mouse parallax
+      // Subtle mouse parallax — stored references for cleanup
+      let handleMouseMove: ((e: MouseEvent) => void) | null = null;
+      let handleMouseLeave: (() => void) | null = null;
+
       if (heroContentRef.current) {
-        heroRef.current.addEventListener('mousemove', (e) => {
+        handleMouseMove = (e: MouseEvent) => {
           const rect = heroRef.current!.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width - 0.5;
           const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -146,13 +149,18 @@ function HeroSection() {
             duration: 0.8,
             ease: 'power2.out',
           });
-        });
-        heroRef.current.addEventListener('mouseleave', () => {
+        };
+        handleMouseLeave = () => {
           gsap.to(heroContentRef.current, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
-        });
+        };
+
+        heroRef.current.addEventListener('mousemove', handleMouseMove);
+        heroRef.current.addEventListener('mouseleave', handleMouseLeave);
       }
 
-      // Animate verse rotation with horizontal slide
+      // Animate verse rotation with horizontal slide — stored interval for cleanup
+      let verseInterval: ReturnType<typeof setInterval> | null = null;
+
       if (verseRef.current) {
         const verses = verseRef.current.querySelectorAll('.verse-item');
         let currentVerse = 0;
@@ -166,22 +174,29 @@ function HeroSection() {
           }});
         };
 
-        gsap.delayedCall(5, () => setInterval(rotateVerse, 4000));
+        gsap.delayedCall(5, () => {
+          verseInterval = setInterval(rotateVerse, 4000);
+        });
       }
+
+      // Cleanup: remove DOM listeners and interval on unmount
+      return () => {
+        if (heroRef.current) {
+          if (handleMouseMove) heroRef.current.removeEventListener('mousemove', handleMouseMove);
+          if (handleMouseLeave) heroRef.current.removeEventListener('mouseleave', handleMouseLeave);
+        }
+        if (verseInterval) clearInterval(verseInterval);
+      };
     },
     { scope: heroRef }
   );
 
   return (
-    <section ref={heroRef} className="relative h-[100dvh] flex flex-col justify-center items-center px-4 md:px-8 grid-overlay overflow-hidden">
-      {/* Mesh gradient bg that adds depth */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: `
-          radial-gradient(ellipse at 20% 50%, rgba(232,168,56,0.08) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 20%, rgba(196,69,54,0.06) 0%, transparent 50%),
-          radial-gradient(ellipse at 50% 80%, rgba(124,152,133,0.05) 0%, transparent 50%)
-        `,
-      }} />
+    <section ref={heroRef} className="relative h-[100dvh] flex flex-col justify-center items-center px-4 md:px-8 grid-overlay overflow-hidden hr-hero-bg">
+      {/* Hyperreal cyan orb — top right */}
+      <div className="hr-orb w-[300px] h-[300px] bg-[#00D4FF] top-[10%] right-[10%]" />
+      {/* Hyperreal warm orb — bottom left */}
+      <div className="hr-orb w-[200px] h-[200px] bg-[#E8A838] bottom-[20%] left-[5%]" />
 
       {/* Corner crosses */}
       <div className="hero-cross absolute top-6 left-6 md:top-10 md:left-10 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center text-pu-terracotta dark:text-red-500 font-black text-2xl md:text-4xl opacity-30" style={{ willChange: 'transform' }}>
@@ -213,12 +228,12 @@ function HeroSection() {
         {/* Main headline — cinematic clip reveal */}
         <h1 className="type-hero font-black leading-[0.85] uppercase tracking-tighter">
           <span className="hero-title-1 block" style={{ willChange: 'transform' }}>The</span>
-          <span className="hero-title-2 block text-pu-amber" style={{ WebkitTextStroke: '0px transparent', willChange: 'transform' }}>
+          <span className="hero-title-2 block hr-neon-text" style={{ willChange: 'transform', color: '#00D4FF' }}>
             Living
           </span>
           <span
-            className="hero-title-3 block text-stroke-thick text-shadow-brutal"
-            style={{ WebkitTextStrokeColor: '#C44536', willChange: 'transform' }}
+            className="hero-title-3 block text-shadow-brutal"
+            style={{ willChange: 'transform', color: '#C44536' }}
           >
             Word
           </span>
@@ -264,10 +279,10 @@ function HeroSection() {
 
         {/* CTA */}
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-          <MagneticButton className="border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-6 py-3 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
+          <MagneticButton className="hr-cta-btn border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-6 py-3 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
             Explore the Seminar
           </MagneticButton>
-          <MagneticButton className="border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-amber dark:bg-pu-amber text-pu-charcoal px-6 py-3 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer">
+          <MagneticButton className="hr-cta-btn border-2 border-pu-charcoal dark:border-pu-warm-white bg-pu-amber dark:bg-pu-amber text-pu-charcoal px-6 py-3 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer">
             12-Week Journey
           </MagneticButton>
         </div>
@@ -323,7 +338,7 @@ function AboutSection() {
   );
 
   return (
-    <section id="about" ref={sectionRef} className="py-[var(--space-lg)] px-4 md:px-8">
+    <section id="about" ref={sectionRef} className="py-[var(--space-lg)] px-4 md:px-8 hr-section-dark">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
@@ -331,17 +346,18 @@ function AboutSection() {
             <h2 className="mt-4">
               A Transformative
               <br />
-              <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>
+              <span className="text-pu-amber font-black">
                 Bible Study
               </span>{' '}
               Framework
             </h2>
           </div>
+          <div className="hr-glow-divider mt-6" />
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-12">
           {/* Main text with terracotta accent line */}
-          <div className="lg:col-span-2 space-y-5 border-l-[4px] border-pu-terracotta pl-6 md:pl-8">
+          <div className="lg:col-span-2 hr-editorial space-y-5 border-l-[4px] border-pu-terracotta pl-6 md:pl-8">
             <p className="about-line type-body leading-relaxed opacity-85">
               The Living Word is a comprehensive 12-week program designed to equip Filipino Christian believers at every stage of spiritual maturity to know God deeply through His attributes, character, and abiding presence. Rooted in the rich tradition of evangelical Filipino church life, this seminar draws from real Bible study sessions that demonstrated the hunger of Filipino believers to encounter God not merely intellectually, but relationally and transformationally.
             </p>
@@ -394,6 +410,8 @@ function PillarsSection() {
 
   return (
     <section id="pillars" ref={pillarsRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
+      {/* Hyperreal cyan orb — top left */}
+      <div className="hr-orb w-[250px] h-[250px] bg-[#00D4FF] top-[5%] left-[-5%]" />
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -408,7 +426,7 @@ function PillarsSection() {
               <h2 className="mt-4">
                 The 4
                 <br />
-                <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>
+                <span className="text-pu-amber font-black">
                   Pillars
                 </span>
               </h2>
@@ -421,11 +439,11 @@ function PillarsSection() {
 
         {/* Progress bar showing session time allocation — 6px tall with rounded caps */}
         <ScrollReveal direction="up" className="mb-12">
-          <div className="flex h-[6px] border-2 border-pu-warm-white dark:border-pu-charcoal overflow-hidden" style={{ borderRadius: '9999px' }}>
-            <div className="bg-pu-amber" style={{ width: '22.2%' }} title="Encounter: 20min" />
-            <div className="bg-pu-terracotta" style={{ width: '38.9%' }} title="Exegesis: 35min" />
-            <div className="bg-pu-warm-white dark:bg-pu-charcoal" style={{ width: '22.2%' }} title="Examination: 20min" />
-            <div className="bg-pu-amber" style={{ width: '16.7%' }} title="Expression: 15min" />
+          <div className="flex h-[6px] border-2 border-pu-warm-white dark:border-pu-charcoal overflow-hidden" style={{ borderRadius: '9999px', background: 'linear-gradient(90deg, #E8A838, #00D4FF, #C44536, #D4B896)' }}>
+            <div style={{ width: '22.2%' }} title="Encounter: 20min" />
+            <div style={{ width: '38.9%' }} title="Exegesis: 35min" />
+            <div style={{ width: '22.2%' }} title="Examination: 20min" />
+            <div style={{ width: '16.7%' }} title="Expression: 15min" />
           </div>
           <div className="flex justify-between mt-2 type-micro font-mono uppercase tracking-wider opacity-65">
             <span>20 min</span>
@@ -523,7 +541,7 @@ function JourneySection() {
   const journeyRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="journey" ref={journeyRef} className="py-[var(--space-lg)] px-4 md:px-8">
+    <section id="journey" ref={journeyRef} className="py-[var(--space-lg)] px-4 md:px-8 hr-section-dark">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
@@ -531,7 +549,7 @@ function JourneySection() {
             <h2 className="mt-4">
               12-Week
               <br />
-              <span className="text-stroke" style={{ WebkitTextStrokeColor: '#C44536' }}>
+              <span className="text-pu-terracotta font-black">
                 Progressive
               </span>{' '}
               Path
@@ -563,6 +581,7 @@ function JourneySection() {
         {/* Week-by-week grid with hover expand and "Currently: Week" indicator */}
         <ParallaxSection speed={0.1}>
           {/* Currently indicator */}
+          <div className="hr-glow-divider mb-6" />
           <div className="flex items-center gap-2 mb-6">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pu-terracotta opacity-75" />
@@ -672,7 +691,9 @@ function SessionStructureSection() {
   );
 
   return (
-    <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20">
+    <section ref={structRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20 relative overflow-hidden">
+      {/* Hyperreal subtle gradient overlay */}
+      <div className="hr-orb w-[200px] h-[200px] bg-[#00D4FF] top-[20%] right-[-5%]" />
       <div className="max-w-5xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
@@ -778,7 +799,7 @@ function SessionStructureSection() {
 
 function MethodologySection() {
   return (
-    <section id="method" className="py-[var(--space-lg)] px-4 md:px-8">
+    <section id="method" className="py-[var(--space-lg)] px-4 md:px-8 hr-section-dark">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
@@ -786,7 +807,7 @@ function MethodologySection() {
             <h2 className="mt-4">
               Core
               <br />
-              <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>
+              <span className="text-pu-amber font-black">
                 Methodology
               </span>
             </h2>
@@ -827,6 +848,8 @@ function MethodologySection() {
 function MetricsSection() {
   return (
     <section id="metrics" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
+      {/* Hyperreal cyan orb — background accent */}
+      <div className="hr-orb w-[300px] h-[300px] bg-[#00D4FF] top-[10%] left-[10%]" />
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -841,7 +864,7 @@ function MetricsSection() {
               <h2 className="mt-4">
                 Success
                 <br />
-                <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>Metrics</span>
+                <span className="text-pu-amber font-black">Metrics</span>
               </h2>
             </div>
             <p className="type-small max-w-sm opacity-75 font-mono">
@@ -867,7 +890,7 @@ function MetricsSection() {
                     color={ring.color}
                   />
                 </div>
-                <span className="mt-2 type-small font-bold uppercase tracking-wider">{ring.label}</span>
+                <span className="mt-2 type-small font-bold uppercase tracking-wider hr-neon-text">{ring.label}</span>
                 <span className="type-micro font-mono opacity-65">{ring.desc}</span>
               </div>
             </ScrollReveal>
@@ -929,7 +952,7 @@ function AdaptationSection() {
   const [activeContext, setActiveContext] = useState<number | null>(null);
 
   return (
-    <section className="py-[var(--space-lg)] px-4 md:px-8">
+    <section className="py-[var(--space-lg)] px-4 md:px-8 hr-section-dark">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal direction="up" className="mb-8 md:mb-16">
           <div className="border-b-[3px] border-pu-charcoal dark:border-pu-warm-white pb-4">
@@ -937,7 +960,7 @@ function AdaptationSection() {
             <h2 className="mt-4">
               Adaptation
               <br />
-              <span className="text-stroke" style={{ WebkitTextStrokeColor: '#C44536' }}>Framework</span>
+              <span className="text-pu-terracotta font-black">Framework</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -998,6 +1021,8 @@ function AdaptationSection() {
 function ResourcesSection() {
   return (
     <section id="resources" className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal relative">
+      {/* Hyperreal gradient orb */}
+      <div className="hr-orb w-[200px] h-[200px] bg-[#E8A838] bottom-[10%] right-[5%]" />
       <div className="absolute inset-0 pointer-events-none opacity-30" style={{
         background: `
           radial-gradient(ellipse at 30% 0%, rgba(232,168,56,0.1) 0%, transparent 50%),
@@ -1011,7 +1036,7 @@ function ResourcesSection() {
             <h2 className="mt-4">
               Essential
               <br />
-              <span className="text-stroke" style={{ WebkitTextStrokeColor: '#E8A838' }}>Resources</span>
+              <span className="text-pu-amber font-black">Resources</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -1099,7 +1124,9 @@ function CommissioningSection() {
   );
 
   return (
-    <section ref={ctaRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20">
+    <section ref={ctaRef} className="py-[var(--space-lg)] px-4 md:px-8 bg-pu-gold-light dark:bg-amber-900/20 relative overflow-hidden">
+      {/* Hyperreal large cyan glow orb behind heading */}
+      <div className="hr-orb w-[400px] h-[400px] bg-[#00D4FF] top-[20%] left-1/2 -translate-x-1/2" />
       <div className="max-w-4xl mx-auto text-center">
         <span className="commission-animate label-tag mb-6 inline-block">Commissioning</span>
         <h2 className="commission-title type-h1 font-black uppercase leading-[0.95] text-pu-charcoal dark:text-pu-cream text-shadow-brutal">
@@ -1116,12 +1143,12 @@ function CommissioningSection() {
         </p>
 
         <div className="commission-animate mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-          <MagneticButton className="border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
+          <MagneticButton className="hr-cta-btn border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-charcoal dark:bg-pu-warm-white text-pu-cream dark:text-pu-charcoal px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider hover:bg-pu-terracotta hover:border-pu-terracotta hover:text-white dark:hover:bg-pu-terracotta dark:hover:border-pu-terracotta dark:hover:text-white cursor-pointer">
             Start Your Journey
           </MagneticButton>
           <MagneticButton
             onClick={handleDownloadPDF}
-            className="border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer"
+            className="hr-cta-btn border-[3px] border-pu-charcoal dark:border-pu-warm-white bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-wider cursor-pointer"
           >
             Download Framework PDF
           </MagneticButton>
@@ -1141,7 +1168,8 @@ function SeminarFooter() {
   }, []);
 
   return (
-    <footer className="border-t-[3px] border-pu-charcoal dark:border-pu-warm-white py-8 md:py-12 px-4 md:px-8 pb-20 md:pb-12">
+    <footer className="border-t-[3px] border-pu-charcoal dark:border-pu-warm-white py-8 md:py-12 px-4 md:px-8 pb-20 md:pb-0">
+      <div className="hr-glow-divider mb-8" />
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
@@ -1201,7 +1229,11 @@ export default function Home() {
       <CustomCursor />
       <GrainOverlay />
       <SeminarNavigation />
-      <main className="min-h-screen overflow-x-hidden">
+      <main className="min-h-screen overflow-x-hidden" id="main-content">
+        {/* Skip link for keyboard navigation */}
+        <a href="#about" className="skip-link">
+          Skip to Content
+        </a>
         {/* ── SCROLL PROGRESS BAR ── */}
         <ScrollProgress />
 
@@ -1232,6 +1264,7 @@ export default function Home() {
             ))}
           </div>
         </div>
+        <div className="hr-gradient-strip" />
         <AboutSection />
 
         {/* ── 4-PILLAR ARCHITECTURE ── */}
@@ -1255,6 +1288,7 @@ export default function Home() {
         {/* ── RESOURCES ── */}
         <ResourcesSection />
 
+        <div className="hr-gradient-strip" />
         {/* ── COMMISSIONING CTA ── */}
         <CommissioningSection />
 

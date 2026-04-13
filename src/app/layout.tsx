@@ -99,6 +99,21 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${spaceMono.variable} antialiased bg-background text-foreground`}
       >
+        <noscript>
+          <style dangerouslySetInnerHTML={{ __html: `
+            .hero-cross,.hero-pre-title,.hero-title-1,.hero-title-2,.hero-title-3,
+            .hero-divider,.hero-tagline,.hero-verse-ref,.hero-stats,.hero-scroll,
+            .hero-watermark,.about-line,.struct-block,.commission-animate,
+            .split-char,.bar-fill,.bar-label,.donut-segment,
+            .reveal-child,.will-reveal {
+              opacity:1!important;transform:none!important;clip-path:none!important;
+              -webkit-text-fill-color:currentColor!important;
+            }
+            .text-stroke,.text-stroke-thick {
+              -webkit-text-fill-color:currentColor!important;
+            }
+          `}} />
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
