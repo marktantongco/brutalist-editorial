@@ -922,6 +922,10 @@ noscript + main .split-char {
   opacity: 0.85;
 }
 
+/* ── CRITICAL: Cream-card contrast handled at component level ──
+   BrutalistCard sets explicit text-pu-charcoal dark:text-pu-cream
+   to prevent cream-on-cream when used inside dark sections. */
+
 /* ── Bottom safe area for mobile bottom nav ── */
 main {
   padding-bottom: 60px;

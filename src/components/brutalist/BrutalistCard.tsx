@@ -87,7 +87,7 @@ export function BrutalistCard({
   return (
     <div
       ref={cardRef}
-      className={`border-2 bg-pu-cream dark:bg-pu-charcoal cursor-default transition-colors ${className}`}
+      className={`border-2 bg-pu-cream dark:bg-pu-charcoal text-pu-charcoal dark:text-pu-cream cursor-default transition-colors ${className}`}
       style={{ borderColor, borderRadius: 0 }}
     >
       {children}
