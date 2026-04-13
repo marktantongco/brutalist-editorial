@@ -48,7 +48,7 @@ export function ScrollProgress() {
     <div className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
       <div
         ref={barRef}
-        className="h-[3px] origin-left bg-[var(--pu-red)]"
+        className="h-[3px] origin-left bg-[var(--pu-terracotta)]"
         style={{
           transform: 'scaleX(0)',
           opacity: 0,

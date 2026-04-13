@@ -16,7 +16,7 @@ export function AnimatedProgressRing({
   value,
   size = 120,
   strokeWidth = 6,
-  color = 'var(--pu-red)',
+  color = 'var(--pu-terracotta)',
   label,
 }: AnimatedProgressRingProps) {
   const containerRef = useRef<HTMLDivElement>(null);

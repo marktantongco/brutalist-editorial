@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════
-   powerUP SHOWCASE — NEO-BRUTALIST DESIGN SYSTEM
+   powerUP SHOWCASE — WARM NEO-BRUTALIST DESIGN SYSTEM
    Brand tokens, typography, animation, and utilities
    ═══════════════════════════════════════════════════ */
 
@@ -46,6 +46,16 @@
   --radius-md: 0px;
   --radius-lg: 0px;
   --radius-xl: 0px;
+  --color-pu-cream: var(--pu-cream);
+  --color-pu-charcoal: var(--pu-charcoal);
+  --color-pu-warm-white: var(--pu-warm-white);
+  --color-pu-terracotta: var(--pu-terracotta);
+  --color-pu-amber: var(--pu-amber);
+  --color-pu-sage: var(--pu-sage);
+  --color-pu-sand: var(--pu-sand);
+  --color-pu-espresso: var(--pu-espresso);
+  --color-pu-peach: var(--pu-peach);
+  --color-pu-gold-light: var(--pu-gold-light);
   --color-pu-yellow: var(--pu-yellow);
   --color-pu-red: var(--pu-red);
   --color-pu-black: var(--pu-black);
@@ -54,62 +64,75 @@
   --color-pu-gray: var(--pu-gray);
 }
 
-/* ── powerUP Brand Palette ── */
+/* ── Warm Brand Palette — Light Mode ── */
 :root {
   --radius: 0px;
-  --background: #FAFAFA;
-  --foreground: #0A0A0A;
-  --card: #FFFFFF;
-  --card-foreground: #0A0A0A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0A0A0A;
-  --primary: #000000;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F5F5F5;
-  --secondary-foreground: #0A0A0A;
-  --muted: #E5E5E5;
-  --muted-foreground: #525252;
-  --accent: #FFEA00;
-  --accent-foreground: #000000;
-  --destructive: #DC2626;
-  --border: #000000;
-  --input: #000000;
-  --ring: #FFEA00;
-  --chart-1: #FFEA00;
-  --chart-2: #CC0000;
-  --chart-3: #000000;
-  --chart-4: #FFFFFF;
-  --chart-5: #333333;
-  --sidebar: #F5F5F5;
-  --sidebar-foreground: #0A0A0A;
-  --sidebar-primary: #000000;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #FFEA00;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #000000;
-  --sidebar-ring: #FFEA00;
+  --background: #FAF5EE;
+  --foreground: #1E1B18;
+  --card: #FFF8F0;
+  --card-foreground: #1E1B18;
+  --popover: #FFF8F0;
+  --popover-foreground: #1E1B18;
+  --primary: #1E1B18;
+  --primary-foreground: #FAF5EE;
+  --secondary: #F5EDE3;
+  --secondary-foreground: #1E1B18;
+  --muted: #E8DFD3;
+  --muted-foreground: #6B5E52;
+  --accent: #E8A838;
+  --accent-foreground: #1E1B18;
+  --destructive: #C44536;
+  --border: #1E1B18;
+  --input: #1E1B18;
+  --ring: #E8A838;
+  --chart-1: #E8A838;
+  --chart-2: #C44536;
+  --chart-3: #1E1B18;
+  --chart-4: #F5EDE3;
+  --chart-5: #7C9885;
+  --sidebar: #F5EDE3;
+  --sidebar-foreground: #1E1B18;
+  --sidebar-primary: #1E1B18;
+  --sidebar-primary-foreground: #FAF5EE;
+  --sidebar-accent: #E8A838;
+  --sidebar-accent-foreground: #1E1B18;
+  --sidebar-border: #1E1B18;
+  --sidebar-ring: #E8A838;
 
-  /* powerUP brand tokens */
-  --pu-yellow: #FFEA00;
-  --pu-red: #CC0000;
-  --pu-black: #0A0A0A;
-  --pu-white: #FAFAFA;
-  --pu-dark: #1A1A1A;
-  --pu-gray: #888888;
-  --pu-border: 3px solid #0A0A0A;
-  --pu-shadow: 6px 6px 0px #CC0000;
-  --pu-shadow-yellow: 6px 6px 0px #FFEA00;
+  /* ── powerUP warm brand tokens ── */
+  --pu-cream: #FAF5EE;
+  --pu-charcoal: #1E1B18;
+  --pu-warm-white: #F5EDE3;
+  --pu-terracotta: #C44536;
+  --pu-amber: #E8A838;
+  --pu-sage: #7C9885;
+  --pu-sand: #D4B896;
+  --pu-espresso: #2C2420;
+  --pu-peach: #F5D5C8;
+  --pu-gold-light: #FFF3D6;
+
+  /* ── Backwards-compatible aliases ── */
+  --pu-yellow: #E8A838;
+  --pu-red: #C44536;
+  --pu-black: #1E1B18;
+  --pu-white: #FAF5EE;
+  --pu-dark: #2C2420;
+  --pu-gray: #7C9885;
+
+  --pu-border: 3px solid #1E1B18;
+  --pu-shadow: 6px 6px 0px #C44536;
+  --pu-shadow-yellow: 6px 6px 0px #E8A838;
   --pu-font-display: 'Syne', system-ui, -apple-system, sans-serif;
   --pu-font-mono: 'Space Mono', 'Courier New', monospace;
 
-  /* ── Fluid Typography Scale ── */
-  --fluid-hero: clamp(3.5rem, 10vw + 1rem, 12rem);
-  --fluid-h1: clamp(2.5rem, 6vw + 0.5rem, 7rem);
-  --fluid-h2: clamp(2rem, 4vw + 0.5rem, 5rem);
-  --fluid-h3: clamp(1.25rem, 2vw + 0.25rem, 2rem);
-  --fluid-body: clamp(0.875rem, 0.5vw + 0.75rem, 1.125rem);
-  --fluid-small: clamp(0.6875rem, 0.3vw + 0.625rem, 0.875rem);
-  --fluid-micro: clamp(0.5625rem, 0.2vw + 0.5rem, 0.75rem);
+  /* ── Fluid Typography Scale (improved readability) ── */
+  --fluid-hero: clamp(3rem, 9vw + 1rem, 10rem);
+  --fluid-h1: clamp(2.25rem, 5.5vw + 0.5rem, 6rem);
+  --fluid-h2: clamp(1.75rem, 3.5vw + 0.5rem, 4.5rem);
+  --fluid-h3: clamp(1.125rem, 1.8vw + 0.25rem, 1.75rem);
+  --fluid-body: clamp(0.9375rem, 0.4vw + 0.8125rem, 1.125rem);
+  --fluid-small: clamp(0.75rem, 0.3vw + 0.6875rem, 0.9375rem);
+  --fluid-micro: clamp(0.625rem, 0.2vw + 0.5625rem, 0.8125rem);
 
   /* ── Spacing System ── */
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
@@ -128,42 +151,51 @@
   --duration-cinematic: 1200ms;
 }
 
+/* ── Warm Dark Mode ── */
 .dark {
-  --background: #0A0A0A;
-  --foreground: #FAFAFA;
-  --card: #111111;
-  --card-foreground: #FAFAFA;
-  --popover: #111111;
-  --popover-foreground: #FAFAFA;
-  --primary: #FAFAFA;
-  --primary-foreground: #000000;
-  --secondary: #1A1A1A;
-  --secondary-foreground: #FAFAFA;
-  --muted: #262626;
-  --muted-foreground: #A3A3A3;
-  --accent: #FFEA00;
-  --accent-foreground: #000000;
-  --destructive: #EF4444;
-  --border: #FAFAFA;
-  --input: #FAFAFA;
-  --ring: #FFEA00;
-  --chart-1: #FFEA00;
-  --chart-2: #FF4444;
-  --chart-3: #FFFFFF;
-  --chart-4: #333333;
-  --chart-5: #CC0000;
-  --sidebar: #1A1A1A;
-  --sidebar-foreground: #FAFAFA;
-  --sidebar-primary: #FAFAFA;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #FFEA00;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #FAFAFA;
-  --sidebar-ring: #FFEA00;
+  --background: #1A1714;
+  --foreground: #F5EDE3;
+  --card: #252220;
+  --card-foreground: #F5EDE3;
+  --popover: #252220;
+  --popover-foreground: #F5EDE3;
+  --primary: #F5EDE3;
+  --primary-foreground: #1A1714;
+  --secondary: #2C2420;
+  --secondary-foreground: #F5EDE3;
+  --muted: #3D3835;
+  --muted-foreground: #A39890;
+  --accent: #E8A838;
+  --accent-foreground: #1A1714;
+  --destructive: #E05A4E;
+  --border: #F5EDE3;
+  --input: #F5EDE3;
+  --ring: #E8A838;
+  --chart-1: #E8A838;
+  --chart-2: #E05A4E;
+  --chart-3: #F5EDE3;
+  --chart-4: #3D3835;
+  --chart-5: #7C9885;
+  --sidebar: #2C2420;
+  --sidebar-foreground: #F5EDE3;
+  --sidebar-primary: #F5EDE3;
+  --sidebar-primary-foreground: #1A1714;
+  --sidebar-accent: #E8A838;
+  --sidebar-accent-foreground: #1A1714;
+  --sidebar-border: #F5EDE3;
+  --sidebar-ring: #E8A838;
 
-  --pu-border: 3px solid #FAFAFA;
-  --pu-shadow: 6px 6px 0px #FF4444;
-  --pu-shadow-yellow: 6px 6px 0px #FFEA00;
+  /* Warm dark brand overrides */
+  --pu-yellow: #E8A838;
+  --pu-red: #E05A4E;
+  --pu-black: #F5EDE3;
+  --pu-white: #1A1714;
+  --pu-dark: #3D3835;
+  --pu-gray: #7C9885;
+
+  --pu-border: 3px solid #F5EDE3;
+  --pu-shadow: 6px 6px 0px #E05A4E;
+  --pu-shadow-yellow: 6px 6px 0px #E8A838;
 }
 
 /* ── Base resets ── */
@@ -189,7 +221,7 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
-    text-decoration-color: var(--pu-yellow);
+    text-decoration-color: var(--pu-amber);
   }
 
   h1 {
@@ -197,7 +229,7 @@
     font-weight: 800;
     text-transform: uppercase;
     font-size: var(--fluid-h1);
-    line-height: 0.85;
+    line-height: 0.9;
     letter-spacing: -0.04em;
   }
 
@@ -232,8 +264,8 @@
   }
 
   ::selection {
-    background: var(--pu-yellow);
-    color: var(--pu-black);
+    background: var(--pu-amber);
+    color: var(--pu-charcoal);
   }
 }
 
@@ -263,11 +295,11 @@
   opacity: 0.5;
 }
 
-/* ── Custom cursor dot ── */
+/* ── Custom cursor dot (warm tones) ── */
 .cursor-dot {
   width: 8px;
   height: 8px;
-  background: var(--pu-black);
+  background: var(--pu-charcoal);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -277,7 +309,7 @@
 }
 
 .dark .cursor-dot {
-  background: var(--pu-yellow);
+  background: var(--pu-amber);
 }
 
 /* ── Text stroke utilities ── */
@@ -292,11 +324,11 @@
 }
 
 .text-fill-yellow {
-  -webkit-text-fill-color: var(--pu-yellow);
+  -webkit-text-fill-color: var(--pu-amber);
 }
 
 .text-fill-red {
-  -webkit-text-fill-color: var(--pu-red);
+  -webkit-text-fill-color: var(--pu-terracotta);
 }
 
 /* ── Marquee separator ── */
@@ -304,20 +336,21 @@
   content: '//';
   margin: 0 0.5em;
   opacity: 0.3;
+  color: var(--pu-terracotta);
 }
 
-/* ── Grid overlay ── */
+/* ── Grid overlay (warm tones) ── */
 .grid-overlay {
   background-image:
-    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(30,27,24,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30,27,24,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 .dark .grid-overlay {
   background-image:
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(245,237,227,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245,237,227,0.03) 1px, transparent 1px);
 }
 
 /* ── Magnetic button base ── */
@@ -337,17 +370,17 @@
   transform: translateY(1px);
 }
 
-/* ── Horizontal rule accent ── */
+/* ── Horizontal rule accent (warm charcoal) ── */
 .hr-accent {
   border: none;
   height: 3px;
-  background: var(--pu-black);
+  background: var(--pu-charcoal);
 }
 
 .hr-accent-yellow {
   border: none;
   height: 3px;
-  background: var(--pu-yellow);
+  background: var(--pu-amber);
 }
 
 /* ── Blend mode text ── */
@@ -361,7 +394,7 @@
   transform: translateY(20px);
 }
 
-/* ── Label tag style ── */
+/* ── Label tag style (warm amber bg) ── */
 .label-tag {
   display: inline-block;
   font-family: var(--pu-font-mono);
@@ -370,14 +403,15 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   padding: 4px 12px;
-  border: 2px solid var(--pu-black);
-  background: var(--pu-yellow);
+  border: 2px solid var(--pu-charcoal);
+  background: var(--pu-amber);
+  color: var(--pu-charcoal);
 }
 
 .dark .label-tag {
-  border-color: var(--pu-yellow);
-  background: var(--pu-yellow);
-  color: var(--pu-black);
+  border-color: var(--pu-amber);
+  background: var(--pu-amber);
+  color: var(--pu-charcoal);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -402,7 +436,7 @@ nav a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--pu-yellow);
+  background: var(--pu-amber);
   transition: width 0.3s ease;
 }
 
@@ -448,7 +482,7 @@ nav {
 
 /* ── Smooth scroll padding for fixed nav ── */
 html {
-  scroll-padding-top: 70px;
+  scroll-padding-top: 80px;
 }
 
 /* ── Skeleton loading animation ── */
@@ -462,10 +496,10 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ── Button focus states for accessibility ── */
+/* ── Button focus states for accessibility (warm amber) ── */
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid var(--pu-yellow);
+  outline: 3px solid var(--pu-amber);
   outline-offset: 2px;
 }
 
@@ -492,26 +526,26 @@ a:focus-visible {
 .type-h1 { font-size: var(--fluid-h1); }
 .type-h2 { font-size: var(--fluid-h2); }
 .type-h3 { font-size: var(--fluid-h3); }
-.type-body { font-size: var(--fluid-body); }
+.type-body { font-size: var(--fluid-body); line-height: 1.7; letter-spacing: 0.01em; }
 .type-small { font-size: var(--fluid-small); }
 .type-micro { font-size: var(--fluid-micro); }
 
-/* ── Dramatic text effects ── */
+/* ── Dramatic text effects (warm shadows) ── */
 .text-outline-heavy {
   -webkit-text-stroke: 4px currentColor;
   -webkit-text-fill-color: transparent;
 }
 
 .text-shadow-brutal {
-  text-shadow: 4px 4px 0px var(--pu-red), 8px 8px 0px var(--pu-yellow);
+  text-shadow: 4px 4px 0px var(--pu-terracotta), 8px 8px 0px var(--pu-amber);
 }
 
 .dark .text-shadow-brutal {
-  text-shadow: 4px 4px 0px #FF4444, 8px 8px 0px var(--pu-yellow);
+  text-shadow: 4px 4px 0px #E05A4E, 8px 8px 0px var(--pu-amber);
 }
 
 .text-shadow-yellow {
-  text-shadow: 3px 3px 0px var(--pu-yellow);
+  text-shadow: 3px 3px 0px var(--pu-amber);
 }
 
 /* ── Hover lift effect ── */
@@ -529,10 +563,10 @@ a:focus-visible {
   transform: translateY(40px);
 }
 
-/* ── Animated gradient border ── */
+/* ── Animated gradient border (warm glow) ── */
 @keyframes borderGlow {
-  0%, 100% { border-color: var(--pu-yellow); }
-  50% { border-color: var(--pu-red); }
+  0%, 100% { border-color: var(--pu-amber); }
+  50% { border-color: var(--pu-terracotta); }
 }
 
 .border-glow {
@@ -562,7 +596,7 @@ a, button, input, [role="button"] {
   transition-duration: var(--duration-normal);
 }
 
-/* ── Mobile bottom nav ── */
+/* ── Mobile bottom nav (warm charcoal border) ── */
 @media (max-width: 767px) {
   .mobile-bottom-nav {
     position: fixed;
@@ -571,9 +605,9 @@ a, button, input, [role="button"] {
     right: 0;
     z-index: 40;
     background: var(--background);
-    border-top: 3px solid var(--pu-black);
+    border-top: 3px solid var(--pu-charcoal);
     padding: 8px 0;
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
   }
 }
 
@@ -593,4 +627,39 @@ a, button, input, [role="button"] {
 }
 .horizontal-scroll-section::-webkit-scrollbar {
   display: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS IMPROVEMENTS
+   ═══════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* Better mobile body text readability */
+  .type-body {
+    line-height: 1.75;
+    letter-spacing: 0.015em;
+  }
+
+  /* Ensure minimum touch target for all interactive elements */
+  button, a, [role="button"], .group {
+    min-height: 40px;
+  }
+
+  /* Better label tag sizing on mobile */
+  .label-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    letter-spacing: 0.15em;
+  }
+
+  /* Improve bottom nav safety area */
+  .mobile-bottom-nav {
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  /* Better section padding on mobile */
+  section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
 }

@@ -45,7 +45,7 @@ export const FOUR_PILLARS = [
     title: 'Encounter',
     duration: '20 minutes',
     subtitle: 'Opening Movement',
-    color: '#FFEA00',
+    color: '#E8A838',
     description:
       'Genuine Bible study begins with an orientation of the heart toward God. Before any intellectual engagement with the text, participants are invited into the presence of God through worship, prayer, and testimony. This deliberate theological act acknowledges that the Holy Spirit is the primary teacher and illuminator of Scripture.',
     points: [
@@ -60,7 +60,7 @@ export const FOUR_PILLARS = [
     title: 'Exegesis',
     duration: '35 minutes',
     subtitle: 'Deep Dive',
-    color: '#CC0000',
+    color: '#C44536',
     description:
       'The intellectual center of the session where participants engage directly with the biblical text using the inductive SOAP method. This pillar prioritizes the authority of Scripture over human opinion, training participants to observe what the text actually says before rushing to application.',
     points: [
@@ -75,7 +75,7 @@ export const FOUR_PILLARS = [
     title: 'Examination',
     duration: '20 minutes',
     subtitle: 'Personal Application',
-    color: '#0A0A0A',
+    color: '#1E1B18',
     description:
       'Moving from mind to heart, creating space for the Holy Spirit to apply truth to each participant\'s unique life circumstances. The SOAP method\'s Application and Prayer steps come alive in small groups of 3-4, providing the intimacy necessary for honest self-examination and accountability.',
     points: [
@@ -90,7 +90,7 @@ export const FOUR_PILLARS = [
     title: 'Expression',
     duration: '15 minutes',
     subtitle: 'Commissioning',
-    color: '#FFEA00',
+    color: '#E8A838',
     description:
       'Sending participants out with purpose, connecting the inward work to outward kingdom impact. Bible study does not become an end in itself but a catalyst for mission and service. This commissioning is the natural overflow of transformed hearts.',
     points: [
@@ -106,52 +106,52 @@ export const PHASES = [
     name: 'Foundation',
     weeks: '1-3',
     focus: 'Knowing the God of the Word',
-    color: '#FFEA00',
+    color: '#E8A838',
     description: 'Establishing the essential framework for knowing God — who He is in His essential nature and how He has revealed Himself through Scripture.',
   },
   {
     name: 'Formation',
     weeks: '4-6',
     focus: 'Being Transformed by the Word',
-    color: '#CC0000',
+    color: '#C44536',
     description: 'Shifting focus to how the knowledge of God transforms the believer\'s identity and daily walk.',
   },
   {
     name: 'Function',
     weeks: '7-9',
     focus: 'Doing the Work of the Word',
-    color: '#0A0A0A',
+    color: '#1E1B18',
     description: 'Moving from personal transformation to active ministry, exploring how knowing God compels service.',
   },
   {
     name: 'Fruit',
     weeks: '10-12',
     focus: 'Multiplying Through the Word',
-    color: '#888888',
+    color: '#7C9885',
     description: 'Equipping participants to reproduce what they have learned, embodying the multiplication mandate of the Great Commission.',
   },
 ];
 
 export const WEEKLY_JOURNEY = [
-  { week: 1, theme: 'God is Spirit', scripture: 'John 4:21-24', phase: 'Foundation', focus: 'Worship in spirit and truth — understanding authentic worship beyond physical locations and rituals', color: '#FFEA00' },
-  { week: 2, theme: 'God is Person', scripture: 'Genesis 1:26-27', phase: 'Foundation', focus: 'Created in God\'s image — the profound implications of bearing the divine likeness in our identity and relationships', color: '#FFEA00' },
-  { week: 3, theme: 'God as Creator', scripture: 'Colossians 1:15-20', phase: 'Foundation', focus: 'First over all creation — Christ\'s supremacy as the agent and sustainer of all that exists', color: '#FFEA00' },
-  { week: 4, theme: 'God\'s Name: I AM', scripture: 'Exodus 3:13-15', phase: 'Formation', focus: 'The Great I AM — encountering God\'s self-revelation to Moses and its significance for understanding His eternal nature', color: '#CC0000' },
-  { week: 5, theme: 'God is One', scripture: 'Deuteronomy 5:6-7', phase: 'Formation', focus: 'No other gods — examining exclusive devotion to the one true God in a pluralistic culture', color: '#CC0000' },
-  { week: 6, theme: 'Jesus: The Living Word', scripture: 'John 1:1-18', phase: 'Formation', focus: 'The Word became flesh — the incarnation as the ultimate revelation of God\'s character and redemptive purpose', color: '#CC0000' },
-  { week: 7, theme: 'The Forgiving Father', scripture: 'Luke 15:11-32', phase: 'Function', focus: 'Parable of the Prodigal Son — experiencing God\'s radical grace and the call to extend that grace to others', color: '#0A0A0A' },
-  { week: 8, theme: 'Jesus\' First Miracle', scripture: 'John 2:1-12', phase: 'Function', focus: 'Wedding at Cana — discovering how Jesus\' compassion meets human need and reveals His glory', color: '#0A0A0A' },
-  { week: 9, theme: 'Community of Believers', scripture: 'Acts 2:42-47', phase: 'Function', focus: 'Breaking bread together — the early church as a model for authentic Christian fellowship and shared life', color: '#0A0A0A' },
-  { week: 10, theme: 'God is Eternal', scripture: 'Psalm 90:2, Acts 17:25', phase: 'Fruit', focus: 'Without beginning or end — resting in God\'s transcendent existence and sovereign sustenance of all life', color: '#888888' },
-  { week: 11, theme: 'God is Omniscient & Omnipotent', scripture: 'Psalm 139, Job 42', phase: 'Fruit', focus: 'All-knowing, all-powerful — finding comfort in God\'s complete knowledge and unlimited power', color: '#888888' },
-  { week: 12, theme: 'God is Omnipresent', scripture: 'Jeremiah 23:23-24', phase: 'Fruit', focus: 'Always with us — living with the awareness of God\'s constant presence in every circumstance', color: '#888888' },
+  { week: 1, theme: 'God is Spirit', scripture: 'John 4:21-24', phase: 'Foundation', focus: 'Worship in spirit and truth — understanding authentic worship beyond physical locations and rituals', color: '#E8A838' },
+  { week: 2, theme: 'God is Person', scripture: 'Genesis 1:26-27', phase: 'Foundation', focus: 'Created in God\'s image — the profound implications of bearing the divine likeness in our identity and relationships', color: '#E8A838' },
+  { week: 3, theme: 'God as Creator', scripture: 'Colossians 1:15-20', phase: 'Foundation', focus: 'First over all creation — Christ\'s supremacy as the agent and sustainer of all that exists', color: '#E8A838' },
+  { week: 4, theme: 'God\'s Name: I AM', scripture: 'Exodus 3:13-15', phase: 'Formation', focus: 'The Great I AM — encountering God\'s self-revelation to Moses and its significance for understanding His eternal nature', color: '#C44536' },
+  { week: 5, theme: 'God is One', scripture: 'Deuteronomy 5:6-7', phase: 'Formation', focus: 'No other gods — examining exclusive devotion to the one true God in a pluralistic culture', color: '#C44536' },
+  { week: 6, theme: 'Jesus: The Living Word', scripture: 'John 1:1-18', phase: 'Formation', focus: 'The Word became flesh — the incarnation as the ultimate revelation of God\'s character and redemptive purpose', color: '#C44536' },
+  { week: 7, theme: 'The Forgiving Father', scripture: 'Luke 15:11-32', phase: 'Function', focus: 'Parable of the Prodigal Son — experiencing God\'s radical grace and the call to extend that grace to others', color: '#1E1B18' },
+  { week: 8, theme: 'Jesus\' First Miracle', scripture: 'John 2:1-12', phase: 'Function', focus: 'Wedding at Cana — discovering how Jesus\' compassion meets human need and reveals His glory', color: '#1E1B18' },
+  { week: 9, theme: 'Community of Believers', scripture: 'Acts 2:42-47', phase: 'Function', focus: 'Breaking bread together — the early church as a model for authentic Christian fellowship and shared life', color: '#1E1B18' },
+  { week: 10, theme: 'God is Eternal', scripture: 'Psalm 90:2, Acts 17:25', phase: 'Fruit', focus: 'Without beginning or end — resting in God\'s transcendent existence and sovereign sustenance of all life', color: '#7C9885' },
+  { week: 11, theme: 'God is Omniscient & Omnipotent', scripture: 'Psalm 139, Job 42', phase: 'Fruit', focus: 'All-knowing, all-powerful — finding comfort in God\'s complete knowledge and unlimited power', color: '#7C9885' },
+  { week: 12, theme: 'God is Omnipresent', scripture: 'Jeremiah 23:23-24', phase: 'Fruit', focus: 'Always with us — living with the awareness of God\'s constant presence in every circumstance', color: '#7C9885' },
 ];
 
 export const SESSION_STRUCTURE = [
   {
     pillar: 'ENCOUNTER',
     time: '20 min',
-    color: '#FFEA00',
+    color: '#E8A838',
     steps: [
       { title: 'Welcome & Worship', desc: '2-3 songs reflecting the weekly theme' },
       { title: 'Prayer of Preparation', desc: 'Invite the Holy Spirit\'s illumination' },
@@ -162,7 +162,7 @@ export const SESSION_STRUCTURE = [
   {
     pillar: 'EXEGESIS',
     time: '35 min',
-    color: '#CC0000',
+    color: '#C44536',
     steps: [
       { title: 'Read Aloud', desc: 'Multiple translations (NIV, ESV, Tagalog)' },
       { title: 'Observation', desc: 'What do you see? Repeated words, contrasts, promises' },
@@ -173,7 +173,7 @@ export const SESSION_STRUCTURE = [
   {
     pillar: 'EXAMINATION',
     time: '20 min',
-    color: '#0A0A0A',
+    color: '#1E1B18',
     steps: [
       { title: 'Personal Reflection', desc: 'Silent journaling time (3-5 min)' },
       { title: 'Breakout Dialogue', desc: 'Groups of 3-4 share reflections' },
@@ -184,7 +184,7 @@ export const SESSION_STRUCTURE = [
   {
     pillar: 'EXPRESSION',
     time: '15 min',
-    color: '#FFEA00',
+    color: '#E8A838',
     steps: [
       { title: 'Community Application', desc: 'How can we live this out together?' },
       { title: 'Outreach Connection', desc: 'Connect truth to witness opportunities' },
@@ -233,19 +233,19 @@ export const METHODOLOGY = [
 ];
 
 export const SUCCESS_METRICS = [
-  { label: 'Attendance Retention', value: 90, suffix: '%', timeframe: '6 Weeks', color: '#FFEA00' },
-  { label: 'Active Participation', value: 80, suffix: '%', timeframe: 'Per Session', color: '#CC0000' },
-  { label: 'SOAP Journal Completion', value: 100, suffix: '%', timeframe: 'Weekly', color: '#0A0A0A' },
-  { label: 'Verses Memorized', value: 12, suffix: '', timeframe: 'By Week 12', color: '#FFEA00' },
-  { label: 'New Groups Launched', value: 2, suffix: '+', timeframe: 'Post-Seminar', color: '#CC0000' },
-  { label: 'Participants Leading', value: 30, suffix: '%', timeframe: 'By Week 12', color: '#888888' },
+  { label: 'Attendance Retention', value: 90, suffix: '%', timeframe: '6 Weeks', color: '#E8A838' },
+  { label: 'Active Participation', value: 80, suffix: '%', timeframe: 'Per Session', color: '#C44536' },
+  { label: 'SOAP Journal Completion', value: 100, suffix: '%', timeframe: 'Weekly', color: '#1E1B18' },
+  { label: 'Verses Memorized', value: 12, suffix: '', timeframe: 'By Week 12', color: '#E8A838' },
+  { label: 'New Groups Launched', value: 2, suffix: '+', timeframe: 'Post-Seminar', color: '#C44536' },
+  { label: 'Participants Leading', value: 30, suffix: '%', timeframe: 'By Week 12', color: '#7C9885' },
 ];
 
 export const METRIC_DONUT = [
-  { label: 'Encounter', value: 22, color: '#FFEA00' },
-  { label: 'Exegesis', value: 39, color: '#CC0000' },
-  { label: 'Examination', value: 22, color: '#0A0A0A' },
-  { label: 'Expression', value: 17, color: '#888888' },
+  { label: 'Encounter', value: 22, color: '#E8A838' },
+  { label: 'Exegesis', value: 39, color: '#C44536' },
+  { label: 'Examination', value: 22, color: '#1E1B18' },
+  { label: 'Expression', value: 17, color: '#7C9885' },
 ];
 
 export const ADAPTATION_CONTEXTS = [

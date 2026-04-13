@@ -61,7 +61,7 @@ export function AnimatedBarChart({ data = [], className = '' }: AnimatedBarChart
     <div ref={chartRef} className={`flex items-end justify-center gap-3 md:gap-6 ${className}`}>
       {data.map((item, i) => (
         <div key={i} className="flex flex-col items-center gap-2">
-          <div className="w-8 md:w-12 lg:w-16 h-40 md:h-56 lg:h-64 border-2 border-black dark:border-white relative bg-white dark:bg-black">
+          <div className="w-8 md:w-12 lg:w-16 h-40 md:h-56 lg:h-64 border-2 border-pu-charcoal dark:border-pu-warm-white relative bg-pu-cream dark:bg-pu-charcoal">
             <div
               className="bar-fill absolute bottom-0 left-0 right-0"
               style={{
@@ -155,7 +155,7 @@ export function AnimatedDonut({ segments = [], size = 200, className = '' }: Ani
         {segments.map((seg, i) => (
           <div key={i} className="flex items-center gap-2 text-xs font-bold">
             <span
-              className="inline-block w-3 h-3 border border-black dark:border-white"
+              className="inline-block w-3 h-3 border border-pu-charcoal dark:border-pu-warm-white"
               style={{ backgroundColor: seg.color }}
             />
             <span>{seg.label}</span>

@@ -18,8 +18,8 @@ interface BrutalistCardProps {
 export function BrutalistCard({
   children,
   className = '',
-  borderColor = 'var(--brutal-border, #000)',
-  hoverShadow = 'var(--brutal-shadow, 6px 6px 0px #FF0000)',
+  borderColor = 'var(--brutal-border, #1E1B18)',
+  hoverShadow = 'var(--brutal-shadow, 6px 6px 0px #C44536)',
 }: BrutalistCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -87,7 +87,7 @@ export function BrutalistCard({
   return (
     <div
       ref={cardRef}
-      className={`border-2 bg-white dark:bg-black cursor-default transition-colors ${className}`}
+      className={`border-2 bg-pu-cream dark:bg-pu-charcoal cursor-default transition-colors ${className}`}
       style={{ borderColor, borderRadius: 0 }}
     >
       {children}
